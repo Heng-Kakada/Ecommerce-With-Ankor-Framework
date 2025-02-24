@@ -1,0 +1,1 @@
+<?php echo $id . " " . $o_id; ?>

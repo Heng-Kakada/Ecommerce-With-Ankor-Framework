@@ -1,0 +1,53 @@
+<?php
+function dd($value)
+{
+    echo "<pre>";
+    var_dump($value);
+    echo "</pre>";
+}
+function pk_base_path($path)
+{
+    return BASE_PATH . $path;
+}
+function pk_get_class_name($class)
+{
+    return basename($class);
+}
+function pk_get_object($class, $attribute)
+{
+    $className = basename($class);
+    if (!isset($attribute[$className])) {
+        return null;
+    }
+    return $attribute[$className];
+}
+function pk_is_file_existed($fileName)
+{
+    return file_exists($fileName);
+}
+
+function pk_replace_extantion($fileName, $type = '.php')
+{
+    return str_replace($type, "", $fileName);
+}
+
+function pk_replace_back_slash($fileName)
+{
+    return str_replace('/', "\\", $fileName);
+}
+
+function pk_replace_forward_slash($fileName)
+{
+    return str_replace('\\', "/", $fileName);
+}
+
+function pk_convert_path_for_namespace($filePath)
+{
+    $filePath = pk_replace_extantion($filePath);
+    return pk_replace_back_slash($filePath);
+}
+
+function pk_request($key)
+{
+    return $_POST[$key];
+}

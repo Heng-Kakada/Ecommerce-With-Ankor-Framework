@@ -1,0 +1,11 @@
+{
+    "name": "project-v1.3/dev-project",
+    "version": "1.3.0",
+    "autoload": {
+        "psr-4": {
+            "src\\": "src/",
+            "AnkorFramework\\" : "AnkorFramework/"
+        }
+    },
+    "require": {}
+}
