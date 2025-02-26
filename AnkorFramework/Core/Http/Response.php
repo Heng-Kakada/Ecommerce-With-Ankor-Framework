@@ -2,6 +2,8 @@
 
 namespace AnkorFramework\Core\Http;
 
+use AnkorFramework\Core\Http\Security\HttpSession;
+
 /**
  * Response
  * 
@@ -16,14 +18,13 @@ namespace AnkorFramework\Core\Http;
  * $errors
  * 
  * 3 . data
- * 
- * $data 
- * 
+ * [
+ * $data => []
+ * ]
  * 
  */
 class Response
 {
-
     protected static $data = [];
 
     public static function success(bool $success, $attribute = [])
@@ -35,13 +36,18 @@ class Response
         return new static;
     }
 
-    public static function errors($errors = [], $statusCode = 0)
+    public static function errors($errors = [], $statusCode = 0, $useSession = false)
     {
-        if (empty($errors)) {
-            self::$data['errors'] = null;
+        if (!$useSession) {
+            if (empty($errors)) {
+                self::$data['errors'] = null;
+                return new static;
+            }
+            self::$data['errors'] = [$errors, $statusCode];
             return new static;
         }
-        self::$data['errors'] = [$errors, $statusCode];
+
+        HttpSession::flash('errors', [$errors, $statusCode]);
         return new static;
     }
 
@@ -59,7 +65,7 @@ class Response
             self::$data['data'] = [];
         }
 
-        extract(array: self::$data);
+        extract(self::$data);
         self::$data = [];
         require_once pk_base_path("src/views/" . $path . ".php");
     }
@@ -68,6 +74,11 @@ class Response
     {
         header("Location: $path");
         exit();
+    }
+
+    public static function previousUrl()
+    {
+        self::redirect($_SERVER['HTTP_REFERER']);
     }
 
 }

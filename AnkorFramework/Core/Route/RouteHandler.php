@@ -2,9 +2,9 @@
 
 namespace AnkorFramework\Core\Route;
 
-
 use AnkorFramework\Core\Http\Response;
 use AnkorFramework\Core\Provider\ControllerProvider;
+use AnkorFramework\Core\Provider\MiddlewareProvider;
 
 class RouteHandler
 {
@@ -28,11 +28,9 @@ class RouteHandler
     {
         $currentMethod = $_SERVER['REQUEST_METHOD'];
 
-        $currentUri = strtok($_SERVER['REQUEST_URI'], '?'); // Remove query params
+        $currentUri = strtok($_SERVER['REQUEST_URI'], '?');
 
         foreach (self::$routes as $route) {
-
-            //$pattern = preg_replace("#\{\w+\}#", '([^\/]+)', $route['path']);
 
             $pattern = self::generatePattern($route['path']);
 
@@ -80,25 +78,12 @@ class RouteHandler
     public function group($callback)
     {
         call_user_func($callback);
-        // Reset middleware after grouping
         self::$middleware = [];
     }
 
     protected static function handleMiddleware($middleware)
     {
-        foreach ($middleware as $m) {
-
-            if (is_callable($m)) {
-
-                if (call_user_func(callback: $m) === false) {
-                    http_response_code(403);
-                    echo "Access Denied";
-                    exit();
-                }
-
-            }
-
-        }
+        MiddlewareProvider::getInstance()->resolve($middleware);
     }
 
 }

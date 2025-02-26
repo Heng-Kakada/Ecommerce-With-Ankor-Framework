@@ -2,6 +2,7 @@
 
 namespace AnkorFramework\Core\Container;
 
+use Exception;
 use ReflectionClass;
 use RuntimeException;
 
@@ -16,21 +17,26 @@ class AppCotainer
 
     private function buildDependencies(ReflectionClass $reflection)
     {
-        // if there is no constructor we return an empty array
+
         $constructor = $reflection->getConstructor();
         if (!$constructor) {
             return [];
         }
 
-        // if there is constructor we get all the parameters
         $parameters = $constructor->getParameters();
+        $className = $reflection->getName();
 
-        return array_map(function ($param) {
+        return array_map(function ($param) use ($className) {
 
             $type = $param->getType();
+            $paramClass = $type->getName();
 
             if (!$type) {
-                throw new RuntimeException();
+                throw new RuntimeException("Cannot resolve type for parameter: " . $param->getName());
+            }
+
+            if ($paramClass === $className) {
+                throw new RuntimeException("Self-referencing dependency detected in class: $className");
             }
 
             return $this->get($type->getName());
@@ -41,7 +47,6 @@ class AppCotainer
 
     public function get($abstract)
     {
-
         if (isset($this->bindings[$abstract])) {
             return $this->bindings[$abstract]($this);
         }

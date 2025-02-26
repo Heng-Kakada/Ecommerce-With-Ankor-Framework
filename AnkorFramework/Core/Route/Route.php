@@ -2,9 +2,9 @@
 
 namespace AnkorFramework\Core\Route;
 
-use AnkorFramework\Core\Http\Response;
+
 use AnkorFramework\Core\Route\RouteHandler;
-use AnkorFramework\Core\Http\Utils\HttpMethod;
+use AnkorFramework\Utils\HttpMethod;
 
 
 class Route extends RouteHandler

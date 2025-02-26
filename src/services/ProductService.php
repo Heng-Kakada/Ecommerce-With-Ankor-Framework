@@ -14,14 +14,4 @@ class ProductService
         $this->productRepository = $productRepository;
     }
 
-    public function showAllProducts(): array
-    {
-        return $this->productRepository->getAll();
-    }
-
-    public function createProduct($data)
-    {
-        $this->productRepository->create($data['body']);
-    }
-
 }

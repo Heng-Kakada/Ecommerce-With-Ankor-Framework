@@ -1,5 +1,5 @@
 <?php
-namespace AnkorFramework\Core\Http\Utils;
+namespace AnkorFramework\Utils;
 
 class HttpMethod
 {

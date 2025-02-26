@@ -8,6 +8,9 @@ class HomeController extends BaseController
 {
     public function index()
     {
+
+        echo password_hash("piko1234", PASSWORD_BCRYPT);
+
         Response::view("home.view");
     }
 }

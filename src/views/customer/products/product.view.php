@@ -1,1 +1,0 @@
-<h1>Product Detial <?php echo $id ?></h1>
