@@ -2,7 +2,9 @@
 
 namespace AnkorFramework\App\Route;
 
+use AnkorFramework\App\Exception\ResponeException;
 use AnkorFramework\App\Http\Response;
+use AnkorFramework\App\Exception\MiddlewareException;
 use AnkorFramework\App\Provider\ControllerProvider;
 use AnkorFramework\App\Provider\MiddlewareProvider;
 
@@ -47,7 +49,7 @@ class RouteHandler
 
         }
 
-        Response::view('/errors/404.view');
+        ResponeException::notFound();
         exit();
     }
 
@@ -83,7 +85,11 @@ class RouteHandler
 
     protected static function handleMiddleware($middleware)
     {
-        MiddlewareProvider::getInstance()->resolve($middleware);
+        try {
+            MiddlewareProvider::getInstance()->resolve($middleware);
+        } catch (MiddlewareException $e) {
+            ResponeException::show($e);
+        }
     }
 
 }

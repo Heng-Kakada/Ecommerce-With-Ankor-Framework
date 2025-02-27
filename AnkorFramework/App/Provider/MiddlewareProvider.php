@@ -1,6 +1,8 @@
 <?php
 namespace AnkorFramework\App\Provider;
 
+use AnkorFramework\App\Exception\MiddlewareException;
+
 class MiddlewareProvider
 {
     private static $instance = null;
@@ -9,7 +11,6 @@ class MiddlewareProvider
     private function __construct()
     {
         $this->middleware = require pk_base_path('/AnkorFramework/config/MiddlewareConfig.php');
-
     }
 
     public static function getInstance()
@@ -26,8 +27,9 @@ class MiddlewareProvider
             return;
         }
         foreach ($keys as $key) {
+
             if (!array_key_exists($key, $this->middleware)) {
-                throw new \Exception("Middleware key '{$key}' not found");
+                throw new MiddlewareException("Middleware Not Found Key $key");
             }
 
             (new $this->middleware[$key])->handle();
