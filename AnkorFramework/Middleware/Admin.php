@@ -4,12 +4,14 @@ namespace AnkorFramework\middleware;
 use AnkorFramework\App\Http\Response;
 use AnkorFramework\App\Middleware\IMiddleware;
 
-class Auth implements IMiddleware
+class Admin implements IMiddleware
 {
     public function handle()
     {
-        if (!isset($_SESSION['user']) ?? false) {
-            Response::redirect('/');
+        if (($_SESSION['user']['role'] ?? null) === 'admin') {
+            return true;
         }
+        Response::previousUrl();
+        return null;
     }
 }

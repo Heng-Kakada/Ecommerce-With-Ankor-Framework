@@ -5,6 +5,7 @@ namespace AnkorFramework\App\Route;
 use AnkorFramework\App\Exception\ResponeException;
 use AnkorFramework\App\Http\Response;
 use AnkorFramework\App\Exception\MiddlewareException;
+use AnkorFramework\App\Http\Security\HttpSession;
 use AnkorFramework\App\Provider\ControllerProvider;
 use AnkorFramework\App\Provider\MiddlewareProvider;
 
@@ -44,13 +45,13 @@ class RouteHandler
 
                 $controller = ControllerProvider::getInstance()->getController($controller);
                 call_user_func_array([$controller, $route['action']], array_slice($matches, 1));
+
                 exit();
             }
 
         }
 
         ResponeException::notFound();
-        exit();
     }
 
     public static function generatePattern($path)

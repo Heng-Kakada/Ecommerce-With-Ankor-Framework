@@ -1,1 +1,1 @@
-<h1>Product Detial <?= $data['id'] ?></h1>
+<h1>Product Detial <?= isset($data) ? $data['id'] : "" ?></h1>

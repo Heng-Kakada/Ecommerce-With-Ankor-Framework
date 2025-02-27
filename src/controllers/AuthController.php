@@ -3,9 +3,9 @@ namespace src\controllers;
 
 use AnkorFramework\App\Http\BaseController;
 use AnkorFramework\App\Http\Response;
+use AnkorFramework\App\Http\Security\HttpSession;
 use AnkorFramework\App\Validate\ValidationException;
 use src\services\AuthService;
-
 
 class AuthController extends BaseController
 {
@@ -18,7 +18,9 @@ class AuthController extends BaseController
 
     public function login()
     {
-
+        if (isset($_SESSION['user'])) {
+            Response::redirect('/');
+        }
         Response::view("login.view");
     }
 
@@ -26,15 +28,11 @@ class AuthController extends BaseController
     {
         $email = pk_request('email');
         $password = pk_request('password');
-
         try {
-
             if ($this->authService->login($email, $password)) {
                 Response::redirect('/');
             }
-
             Response::redirect('/login');
-
         } catch (ValidationException $validationException) {
             Response::errors($validationException->getErrors(), 0, true)::previousUrl();
         }
@@ -47,6 +45,7 @@ class AuthController extends BaseController
 
     public function logout()
     {
-        // Logout method code here
+        HttpSession::destroy();
+        Response::redirect('/');
     }
 }

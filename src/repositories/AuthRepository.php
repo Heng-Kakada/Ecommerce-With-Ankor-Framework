@@ -20,4 +20,15 @@ class AuthRepository
         return $this->database->query('select * from users where email = :email', ['email' => $email])->find();
     }
 
+    public function findEmailPasswordRoleByEmail($email)
+    {
+        return $this->database->query("select 
+        users.email,
+        users.password, 
+        roles.name as role 
+        from users join roles on 
+        users.role_id = roles.id 
+        where users.email = :email", ['email' => $email])->find();
+    }
+
 }

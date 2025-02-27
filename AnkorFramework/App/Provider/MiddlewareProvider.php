@@ -5,7 +5,7 @@ use AnkorFramework\App\Exception\MiddlewareException;
 
 class MiddlewareProvider
 {
-    private static $instance = null;
+    private static ?self $instance = null;
     private $middleware;
 
     private function __construct()
@@ -15,24 +15,30 @@ class MiddlewareProvider
 
     public static function getInstance()
     {
-        if (self::$instance == null) {
-            self::$instance = new MiddlewareProvider();
-        }
-        return self::$instance;
+        return self::$instance ??= new self();
     }
 
     public function resolve($keys)
     {
-        if (empty($keys)) {
-            return;
-        }
+
         foreach ($keys as $key) {
 
-            if (!array_key_exists($key, $this->middleware)) {
-                throw new MiddlewareException("Middleware Not Found Key $key");
+            if (!isset($this->middleware[$key])) {
+                throw new MiddlewareException("Middleware Not Found: $key");
             }
 
-            (new $this->middleware[$key])->handle();
+            $middlewareClass = $this->middleware[$key];
+
+            if (!class_exists($middlewareClass)) {
+                throw new MiddlewareException("Middleware Class Not Found: $middlewareClass");
+            }
+
+            $middleware = new $middlewareClass();
+
+            if ($middleware->handle() !== null) {
+                break;
+            }
+
         }
     }
 

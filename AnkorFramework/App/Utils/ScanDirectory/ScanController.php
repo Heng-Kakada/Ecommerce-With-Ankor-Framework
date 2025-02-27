@@ -4,6 +4,8 @@
 namespace AnkorFramework\App\Utils\ScanDirectory;
 
 
+use AnkorFramework\App\Exception\ResponeException;
+use AnkorFramework\App\Http\Response;
 use Exception;
 use RecursiveIteratorIterator;
 use RecursiveDirectoryIterator;
@@ -33,7 +35,7 @@ class ScanController implements IScan
                 }
             }
         } catch (Exception $e) {
-            throw new Exception("Custome: {$e->getMessage()}");
+            ResponeException::show($e->getMessage());
         }
 
         // split data from 1D to 2D Array

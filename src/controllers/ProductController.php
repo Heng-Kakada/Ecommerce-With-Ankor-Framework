@@ -16,7 +16,7 @@ class ProductController extends BaseController
 
     public function index()
     {
-        Response::errors([])::view('user/products/products.view');
+        Response::view('user/products/products.view');
     }
 
     public function create()

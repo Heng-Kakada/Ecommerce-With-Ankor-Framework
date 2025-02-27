@@ -23,7 +23,7 @@ class AuthService
             'password' => 'required'
         ]);
 
-        $user = $this->authRepository->findByEmail($email);
+        $user = $this->authRepository->findEmailPasswordRoleByEmail($email);
 
         return $this->verifyUserAndPassword($user, $password);
     }
@@ -33,7 +33,8 @@ class AuthService
         if ($user) {
             if (password_verify($password, $user['password'])) {
                 HttpSession::create('user', [
-                    'email' => $user['email']
+                    'email' => $user['email'],
+                    'role' => $user['role']
                 ]);
                 return true;
             }

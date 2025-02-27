@@ -78,7 +78,11 @@ class Response
 
     public static function previousUrl()
     {
-        self::redirect($_SERVER['HTTP_REFERER']);
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            self::redirect($_SERVER['HTTP_REFERER']);
+        } else {
+            self::redirect('/');
+        }
     }
 
 }
