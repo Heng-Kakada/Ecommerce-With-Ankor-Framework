@@ -2,7 +2,7 @@
 
 use src\controllers\AuthController;
 use src\controllers\HomeController;
-use AnkorFramework\Core\Route\Route;
+use AnkorFramework\App\Route\Route;
 use src\controllers\ProductController;
 
 // write your routes here

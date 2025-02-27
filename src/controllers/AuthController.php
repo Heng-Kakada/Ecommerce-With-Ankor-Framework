@@ -1,12 +1,13 @@
 <?php
 namespace src\controllers;
 
-use AnkorFramework\Core\Http\Response;
-use AnkorFramework\Core\Validate\ValidationException;
+use AnkorFramework\App\Http\BaseController;
+use AnkorFramework\App\Http\Response;
+use AnkorFramework\App\Validate\ValidationException;
 use src\services\AuthService;
 
 
-class AuthController
+class AuthController extends BaseController
 {
     private $authService;
 
@@ -17,9 +18,6 @@ class AuthController
 
     public function login()
     {
-        if()
-
-
 
         Response::view("login.view");
     }

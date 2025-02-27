@@ -1,9 +1,9 @@
 <?php
 namespace src\services;
 
-use AnkorFramework\Core\Http\Security\HttpSession;
-use AnkorFramework\Core\Validate\ValidationException;
-use AnkorFramework\Core\Validate\Validator;
+use AnkorFramework\App\Http\Security\HttpSession;
+use AnkorFramework\App\Validate\ValidationException;
+use AnkorFramework\App\Validate\Validator;
 use src\repositories\AuthRepository;
 
 class AuthService

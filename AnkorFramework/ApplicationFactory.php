@@ -2,9 +2,9 @@
 namespace AnkorFramework;
 
 
-use AnkorFramework\Core\Container\AppCotainer;
+use AnkorFramework\App\Container\AppCotainer;
 use Exception;
-use AnkorFramework\Utils\ScanDirectory\ScanController;
+use AnkorFramework\App\Utils\ScanDirectory\ScanController;
 
 
 class ApplicationFactory

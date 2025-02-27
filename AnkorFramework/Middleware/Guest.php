@@ -1,8 +1,9 @@
 <?php
-namespace AnkorFramework\Middleware;
+namespace AnkorFramework\middleware;
 
-use AnkorFramework\Core\Http\Response;
-use AnkorFramework\Core\middleware\IMiddleware;
+use AnkorFramework\App\Http\Response;
+use AnkorFramework\App\Middleware\IMiddleware;
+
 class Guest implements IMiddleware
 {
     public function handle()

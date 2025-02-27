@@ -1,7 +1,9 @@
 <?php
 namespace src\repositories;
 
-use AnkorFramework\Database\Database;
+use AnkorFramework\App\Database\Database;
+
+
 
 class AuthRepository
 {

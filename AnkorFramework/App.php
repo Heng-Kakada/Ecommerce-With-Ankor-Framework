@@ -2,7 +2,7 @@
 
 namespace AnkorFramework;
 
-use AnkorFramework\Core\Route\Route;
+use AnkorFramework\App\Route\Route;
 
 require_once "bootstrap/app.php";
 

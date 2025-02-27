@@ -1,8 +1,8 @@
 <?php
 namespace src\controllers;
 
-use AnkorFramework\Core\Http\BaseController;
-use AnkorFramework\Core\Http\Response;
+use AnkorFramework\App\Http\BaseController;
+use AnkorFramework\App\Http\Response;
 use src\services\ProductService;
 
 class ProductController extends BaseController

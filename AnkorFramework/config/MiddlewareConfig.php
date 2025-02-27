@@ -1,7 +1,11 @@
 <?php
 
-use AnkorFramework\Middleware\Auth;
-use AnkorFramework\Middleware\Guest;
+use AnkorFramework\middleware\Auth;
+use AnkorFramework\middleware\Guest;
+
+
+
+
 
 return [
     'auth' => Auth::class,

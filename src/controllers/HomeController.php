@@ -1,16 +1,19 @@
 <?php
 namespace src\controllers;
 
-use AnkorFramework\Core\Http\BaseController;
-use AnkorFramework\Core\Http\Response;
+use AnkorFramework\App\Http\BaseController;
+use AnkorFramework\App\Http\Response;
 
 class HomeController extends BaseController
 {
     public function index()
     {
-
-        echo password_hash("piko1234", PASSWORD_BCRYPT);
-
         Response::view("home.view");
     }
+
+    public function contact()
+    {
+        Response::view('contact.view');
+    }
+
 }

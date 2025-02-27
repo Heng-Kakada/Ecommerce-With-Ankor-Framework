@@ -1,11 +1,12 @@
 <?php
 
-use AnkorFramework\Core\Route\Route;
+use AnkorFramework\App\Route\Route;
 use src\controllers\ContactController;
+use src\controllers\HomeController;
 use src\controllers\ProductController;
 
 Route::middleware("guest")->group(function () {
-    Route::get('/contact', ContactController::class, 'index');
+    Route::get('/contact', HomeController::class, 'contact');
 });
 
 Route::middleware("auth")->group(function () {

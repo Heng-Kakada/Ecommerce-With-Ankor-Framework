@@ -1,8 +1,8 @@
 <?php
 namespace src\services;
 
-use AnkorFramework\Core\Validate\ValidationException;
-use AnkorFramework\Core\Validate\Validator;
+use AnkorFramework\App\Validate\ValidationException;
+use AnkorFramework\App\Validate\Validator;
 use src\repositories\ProductRepository;
 
 class ProductService
