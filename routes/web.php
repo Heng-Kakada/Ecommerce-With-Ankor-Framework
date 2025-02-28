@@ -1,7 +1,9 @@
 <?php
 
 use src\controllers\AuthController;
+use src\controllers\DashboardController;
 use src\controllers\HomeController;
+use src\controllers\ProductController;
 use AnkorFramework\App\Route\Route;
 
 
@@ -10,6 +12,13 @@ Route::get('/', HomeController::class, 'index');
 Route::get("/login", AuthController::class, 'login');
 Route::post('/login-execute', AuthController::class, 'store');
 
+Route::get('/admin', DashboardController::class, 'index');
 
+
+//product route
+
+    Route::get('/admin/products', ProductController::class, 'index');
+    Route::get('/admin/products/create', ProductController::class, 'create');
+    // Route::get('/products/{id}', ProductController::class, action: 'show');
 
 require_once "auth.php";
