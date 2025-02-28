@@ -19,6 +19,7 @@ Route::get('/admin', DashboardController::class, 'index');
 
     Route::get('/admin/products', ProductController::class, 'index');
     Route::get('/admin/products/create', ProductController::class, 'create');
+    Route::get('/admin/products/update', ProductController::class,'update');
     // Route::get('/products/{id}', ProductController::class, action: 'show');
 
 require_once "auth.php";

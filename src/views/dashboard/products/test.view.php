@@ -28,7 +28,7 @@ include __DIR__ . '/../components/sidebar.php';
                             </a>
                         </div>
 
-                        <table class="table datatable">
+                        <table class="table table-hover" style="vertical-align: middle;"> <!-- if wanted to get sorting in every column use 'table datatable' instead-->
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -44,7 +44,8 @@ include __DIR__ . '/../components/sidebar.php';
                                 <tr>
                                     <th scope="row">1</th>
                                     <td>
-                                        <img src="/api/placeholder/50/50" alt="Product" class="img-fluid rounded" style="max-width: 50px;">
+                                        <img src="/../dashboard/assets/img/product-1.jpg" alt="Product" class="img-fluid rounded"
+                                            style="max-width: 50px;">
                                     </td>
                                     <td>Leather Jacket</td>
                                     <td>Clothing</td>
@@ -52,13 +53,11 @@ include __DIR__ . '/../components/sidebar.php';
                                     <td>50</td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <a href="/products/1" class="btn btn-info btn-sm" title="View">
-                                                <i class="bi bi-eye"></i>
-                                            </a>
-                                            <a href="/products/1/edit" class="btn btn-warning btn-sm" title="Edit">
+                                            <a href="/admin/products/update" class="btn btn-info btn-sm" title="Edit">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
-                                            <button class="btn btn-danger btn-sm" title="Delete" data-bs-toggle="modal" data-bs-target="#deleteProductModal">
+                                            <button class="btn btn-danger btn-sm" title="Delete" data-bs-toggle="modal"
+                                                data-bs-target="#deleteProductModal">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </div>
@@ -67,7 +66,8 @@ include __DIR__ . '/../components/sidebar.php';
                                 <tr>
                                     <th scope="row">2</th>
                                     <td>
-                                        <img src="/api/placeholder/50/50" alt="Product" class="img-fluid rounded" style="max-width: 50px;">
+                                        <img src="/../dashboard/assets/img/product-2.jpg" alt="Product" class="img-fluid rounded"
+                                            style="max-width: 50px;">
                                     </td>
                                     <td>Smart Watch</td>
                                     <td>Electronics</td>
@@ -75,13 +75,11 @@ include __DIR__ . '/../components/sidebar.php';
                                     <td>25</td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <a href="/products/2" class="btn btn-info btn-sm" title="View">
-                                                <i class="bi bi-eye"></i>
-                                            </a>
-                                            <a href="/products/2/edit" class="btn btn-warning btn-sm" title="Edit">
+                                            <a href="/admin/products/update" class="btn btn-info btn-sm" title="Edit">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
-                                            <button class="btn btn-danger btn-sm" title="Delete" data-bs-toggle="modal" data-bs-target="#deleteProductModal">
+                                            <button class="btn btn-danger btn-sm" title="Delete" data-bs-toggle="modal"
+                                                data-bs-target="#deleteProductModal">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </div>
@@ -90,7 +88,8 @@ include __DIR__ . '/../components/sidebar.php';
                                 <tr>
                                     <th scope="row">3</th>
                                     <td>
-                                        <img src="/api/placeholder/50/50" alt="Product" class="img-fluid rounded" style="max-width: 50px;">
+                                        <img src="/../dashboard/assets/img/product-3.jpg" alt="Product" class="img-fluid rounded"
+                                            style="max-width: 50px;">
                                     </td>
                                     <td>Wireless Earbuds</td>
                                     <td>Electronics</td>
@@ -98,13 +97,11 @@ include __DIR__ . '/../components/sidebar.php';
                                     <td>100</td>
                                     <td>
                                         <div class="btn-group" role="group">
-                                            <a href="/products/3" class="btn btn-info btn-sm" title="View">
-                                                <i class="bi bi-eye"></i>
-                                            </a>
-                                            <a href="/products/3/edit" class="btn btn-warning btn-sm" title="Edit">
+                                            <a href="/admin/products/update" class="btn btn-info btn-sm" title="Edit">
                                                 <i class="bi bi-pencil"></i>
                                             </a>
-                                            <button class="btn btn-danger btn-sm" title="Delete" data-bs-toggle="modal" data-bs-target="#deleteProductModal">
+                                            <button class="btn btn-danger btn-sm" title="Delete" data-bs-toggle="modal"
+                                                data-bs-target="#deleteProductModal">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </div>
@@ -130,8 +127,8 @@ include __DIR__ . '/../components/sidebar.php';
                     Are you sure you want to delete this product? This action cannot be undone.
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-outline-danger">Delete</button>
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>

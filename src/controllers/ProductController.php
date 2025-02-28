@@ -24,6 +24,10 @@ class ProductController extends BaseController
         Response::view('dashboard/products/testcreate.view');
     }
 
+    public function update()
+    {
+        Response::view('dashboard/products/update.view');
+    }
     public function store()
     {
         Response::redirect('/products');
