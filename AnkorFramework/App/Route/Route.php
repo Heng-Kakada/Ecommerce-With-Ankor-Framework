@@ -26,7 +26,7 @@ class Route extends RouteHandler
     {
         self::add(HttpMethod::PATCH, $path, $controller, $action, self::$middleware);
     }
-    public static function detele($path, $controller, $action = null)
+    public static function delete($path, $controller, $action = null)
     {
         self::add(HttpMethod::DELETE, $path, $controller, $action, self::$middleware);
     }

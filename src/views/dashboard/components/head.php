@@ -28,6 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="/../dashboard/assets/css/style.css" rel="stylesheet">
+  <link href="/../dashboard/assets/css/custom.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: NiceAdmin

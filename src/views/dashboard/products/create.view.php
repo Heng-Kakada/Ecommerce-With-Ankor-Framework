@@ -1,94 +1,103 @@
 <?php
 require __DIR__ . '/../components/head.php';
-include_once __DIR__ . '/../components/header.php';
-include_once __DIR__ . '/../components/sidebar.php';
+include __DIR__ . '/../components/header.php';
+include __DIR__ . '/../components/sidebar.php';
 ?>
-
 <main id="main" class="main">
 
-  <button type="button" class="btn btn-primary rounded-pill mb-4" onclick="goBack()"><i
-      class="bi bi-caret-left-fill"></i>Back</button>
+    <div class="pagetitle">
+        <h1>Create Product</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="/products">Products</a></li>
+                <li class="breadcrumb-item active">Create Product</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
 
-  <div class="pagetitle">
-    <h1>Add Product</h1>
-    <nav>
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/admin">Home</a></li>
-        <li class="breadcrumb-item"><a href="/admin/products">Product</a></li>
-        <li class="breadcrumb-item active">Create</li>
-      </ol>
-    </nav>
-  </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Product Information</h5>
 
-  <section class="section dashboard">
+                        <form method="POST" action="/products/store" class="needs-validation" novalidate>
+                            <div class="row mb-3">
+                                <label for="productName" class="col-sm-2 col-form-label">Product Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="productName" name="name" required>
+                                    <div class="invalid-feedback">Please enter the product name.</div>
+                                </div>
+                            </div>
 
-    <div class="card">
-      <div class="card-body">
-        <!-- <h5 class="card-title">Add a new product</h5> -->
+                            <div class="row mb-3">
+                                <label for="productDescription" class="col-sm-2 col-form-label">Description</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" id="productDescription" name="description"
+                                        rows="4"></textarea>
+                                </div>
+                            </div>
 
-        <!-- Multi Columns Form -->
-        <form class="row g-3 my-2">
-          <div class="col-md-12">
-            <label for="inputName5" class="form-label">Product Name</label>
-            <input type="text" class="form-control" id="inputName5">
-          </div>
-          <div class="col-md-6">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Textarea</label>
-            <div class="col-sm-10">
-              <textarea class="form-control" style="height: 100px"></textarea>
+                            <div class="row mb-3">
+                                <label for="productPrice" class="col-sm-2 col-form-label">Price</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <span class="input-group-text">$</span>
+                                        <input type="number" class="form-control" id="productPrice" name="price" 
+                                               step="0.01" value="249.99" required>
+                                    </div>
+                                    <div class="invalid-feedback">Please enter the product price.</div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="productCategory" class="col-sm-2 col-form-label">Category</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" id="productCategory" name="category" required>
+                                        <option selected disabled value="">Choose category...</option>
+                                        <option value="electronics">Electronics</option>
+                                        <option value="clothing">Clothing</option>
+                                        <option value="books">Books</option>
+                                        <option value="accessories">Accessories</option>
+                                    </select>
+                                    <div class="invalid-feedback">Please select a category.</div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="productImage" class="col-sm-2 col-form-label">Product Image</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" type="file" id="productImage" name="image"
+                                        accept="image/*">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="productStock" class="col-sm-2 col-form-label">Stock Quantity</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="productStock" name="stock" required>
+                                    <div class="invalid-feedback">Please enter the stock quantity.</div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="row mb-3">
+                                <div class="col-sm-10 offset-sm-2">
+                                    <button type="submit" class="btn btn-primary me-2">Create Product</button>
+                                    <a href="/admin/products"><button type="button" class="btn btn-secondary">Cancel</button></a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-6">
-            <label for="inputPassword" class="col-sm-2 col-form-label">Textarea</label>
-            <div class="col-sm-10">
-              <textarea class="form-control" style="height: 100px"></textarea>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <label for="price" class="form-label">Price</label>
-            <div class="input-group" id="price">
-              <span class="input-group-text">$</span>
-              <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-              <span class="input-group-text">.00</span>
-            </div>
-          </div>
-
-
-          <div class="col-md-4">
-            <label for="inputState" class="form-label">State</label>
-            <select id="inputState" class="form-select">
-              <option selected>Choose...</option>
-              <option>...</option>
-            </select>
-          </div>
-          <div class="col-md-2">
-            <label for="inputZip" class="form-label">Zip</label>
-            <input type="text" class="form-control" id="inputZip">
-          </div>
-          <div class="col-12">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="gridCheck">
-              <label class="form-check-label" for="gridCheck">
-                Check me out
-              </label>
-            </div>
-          </div>
-          <div class="text-center">
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="reset" class="btn btn-secondary">Reset</button>
-          </div>
-        </form><!-- End Multi Columns Form -->
-
-
-
-      </div>
-    </div>
-  </section>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
-</main><!-- End #main -->
+        </div>
+    </section>
+</main>
 
 <?php
-//include ('components/footer.php');
 include __DIR__ . '/../components/foot.php';
 ?>

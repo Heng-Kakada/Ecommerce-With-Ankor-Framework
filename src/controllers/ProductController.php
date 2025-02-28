@@ -16,12 +16,14 @@ class ProductController extends BaseController
 
     public function index()
     {
-        Response::view('dashboard/products/test.view');
+        $products = $this->productService->getProducts();
+        
+        Response::view('dashboard/products/products.view');
     }
 
     public function create()
     {
-        Response::view('dashboard/products/testcreate.view');
+        Response::view('dashboard/products/create.view');
     }
 
     public function update()
@@ -30,7 +32,8 @@ class ProductController extends BaseController
     }
     public function store()
     {
-        Response::redirect('/products');
+        Response::view('dashboard/products/producttest.view');
+        // Response::redirect('/products');
     }
 
     public function show($id)

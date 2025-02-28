@@ -11,7 +11,7 @@
         </li><!-- End Dashboard Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="users-profile.html">
+            <a class="nav-link collapsed" href="/admin/categories">
                 <i class="bi bi-stack"></i>
                 <span>Categories</span>
             </a>
@@ -21,6 +21,13 @@
             <a class="nav-link collapsed" href="/admin/products">
                 <i class="bi bi-box"></i>
                 <span>Products</span>
+            </a>
+        </li><!-- End Products Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/admin/users">
+            <i class="bi bi-people-fill"></i>
+                <span>Users</span>
             </a>
         </li><!-- End Products Nav -->
 

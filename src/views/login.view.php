@@ -1,5 +1,5 @@
 <?php
-use AnkorFramework\Core\Http\Security\HttpSession;
+use AnkorFramework\App\Http\Security\HttpSession;
 $errors = HttpSession::get('errors');
 HttpSession::unflash();
 ?>

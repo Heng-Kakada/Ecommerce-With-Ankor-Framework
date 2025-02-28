@@ -46,4 +46,8 @@ class Database
         }
         return $result;
     }
+    public function isExecuted()
+    {
+        return $this->statement ? $this->statement->rowCount() > 0 : false;
+    }
 }
