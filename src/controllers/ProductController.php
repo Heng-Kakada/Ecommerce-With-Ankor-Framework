@@ -16,12 +16,12 @@ class ProductController extends BaseController
 
     public function index()
     {
-        Response::view('user/products/products.view');
+        Response::view('dashboard/products/test.view');
     }
 
     public function create()
     {
-        Response::view('user/products/create.view');
+        Response::view('dashboard/products/testcreate.view');
     }
 
     public function store()
