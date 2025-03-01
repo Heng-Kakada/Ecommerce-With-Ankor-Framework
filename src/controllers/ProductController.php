@@ -16,17 +16,24 @@ class ProductController extends BaseController
 
     public function index()
     {
-        Response::view('user/products/products.view');
+        $products = $this->productService->getProducts();
+        
+        Response::view('dashboard/products/products.view');
     }
 
     public function create()
     {
-        Response::view('user/products/create.view');
+        Response::view('dashboard/products/create.view');
     }
 
+    public function update()
+    {
+        Response::view('dashboard/products/update.view');
+    }
     public function store()
     {
-        Response::redirect('/products');
+        Response::view('dashboard/products/producttest.view');
+        // Response::redirect('/products');
     }
 
     public function show($id)

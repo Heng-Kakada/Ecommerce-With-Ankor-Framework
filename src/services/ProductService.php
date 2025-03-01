@@ -13,5 +13,8 @@ class ProductService
     {
         $this->productRepository = $productRepository;
     }
-
+    public function getProducts()
+    {
+        return $this->productRepository->get();
+    }
 }

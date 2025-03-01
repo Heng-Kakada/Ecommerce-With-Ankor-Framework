@@ -29,7 +29,7 @@ class RouteHandler
 
     public static function handle()
     {
-        $currentMethod = $_SERVER['REQUEST_METHOD'];
+        $currentMethod = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 
         $currentUri = strtok($_SERVER['REQUEST_URI'], '?');
 

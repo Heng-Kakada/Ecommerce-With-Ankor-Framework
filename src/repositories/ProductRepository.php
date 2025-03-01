@@ -11,5 +11,8 @@ class ProductRepository
     {
         $this->database = $database;
     }
-
+    public function get()
+    {
+        return $this->database->query("SELECT * FROM tbproducts;");
+    }
 }
