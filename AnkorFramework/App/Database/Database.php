@@ -14,7 +14,7 @@ class Database
         $config = require pk_base_path("/AnkorFramework/config/DatabaseConfig.php");
         $dsn = 'mysql:' . http_build_query($config['MySQL'], "", ";");
 
-        $this->connection = new PDO($dsn, "root", "", [
+        $this->connection = new PDO($dsn, $_ENV['DB_USER'], $_ENV['DB_PASS'], [
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]);
     }

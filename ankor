@@ -1,11 +1,18 @@
 #!/usr/bin/env php
 <?php
 
+use Dotenv\Dotenv;
+require __DIR__ . '/vendor/autoload.php';
+
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 $command = $argv[1] ?? null;
 
 switch ($command) {
     case 'run':
-        $port = $argv[2] ?? 8888;
+        $port = $argv[2] ?? $_ENV['APP_PORT'] ?? 8000;
+        $host = $_ENV['APP_URL'];
 
         echo "                _                ______                                           _    \n";
         echo "    /\         | |              |  ____|                                         | |   \n";
@@ -14,12 +21,12 @@ switch ($command) {
         echo " / ____ \| | | |   < (_) | |    | |  | | | (_| | | | | | |  __/\ V  V / (_) | |  |   < \n";
         echo "/_/    \_\_| |_|_|\_\___/|_|    |_|  |_|  \__,_|_| |_| |_|\___| \_/\_/ \___/|_|  |_|\_\'\n";
         echo "\n";
-        echo "Starting server on http://localhost:$port\n";
-        exec("php -S localhost:$port -t public");
+        echo "Starting server on $host:$port\n";
+        exec("php -S $host:$port -t public");
         break;
 
     default:
         echo "Available commands:\n";
-        echo "  run [port] - Start the development server (default: 8888)\n";
+        echo "  run [port] - Start the development server (default: " . $_ENV['APP_PORT'] ?? 8000 . ")\n";
         break;
 }
