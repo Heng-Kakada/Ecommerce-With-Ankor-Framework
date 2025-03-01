@@ -23,9 +23,8 @@ include __DIR__ . '/../components/sidebar.php';
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Category Information</h5>
-
-                        <form method="POST" action="/admin/categories/edit" 
-                            enctype="multipart/form-data">
+                        <form method="POST" action="/admin/categories/edit" enctype="multipart/form-data">
+                            <input type="hidden" name="_method" value="PUT">
                             <input type="hidden" name="id" value="<?= $data['category']['id'] ?>">
 
                             <div class="row mb-3">
@@ -34,11 +33,11 @@ include __DIR__ . '/../components/sidebar.php';
                                     <input type="text" class="form-control" id="productName" name="name"
                                         value="<?= $data['category']['name'] ?>">
 
-                                        <?php if (isset($errors[0]['name'])): ?>
-                                            <div class="errors-validate">
-                                                <?= $errors[0]['name'] ?>
-                                            </div>
-                                        <?php endif; ?>
+                                    <?php if (isset($errors[0]['name'])): ?>
+                                        <div class="errors-validate">
+                                            <?= $errors[0]['name'] ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
@@ -48,11 +47,11 @@ include __DIR__ . '/../components/sidebar.php';
                                     <textarea class="form-control" id="productDescription" name="description"
                                         rows="4"><?= $data['category']['description'] ?></textarea>
 
-                                        <?php if (isset($errors[0]['description'])): ?>
-                                            <div class="errors-validate">
-                                                <?= $errors[0]['name'] ?>
-                                            </div>
-                                        <?php endif; ?>
+                                    <?php if (isset($errors[0]['description'])): ?>
+                                        <div class="errors-validate">
+                                            <?= $errors[0]['name'] ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
@@ -63,7 +62,7 @@ include __DIR__ . '/../components/sidebar.php';
                                             class="btn btn-secondary">Cancel</button></a>
                                 </div>
                             </div>
-                            
+
                         </form>
                     </div>
                 </div>

@@ -154,10 +154,16 @@ include __DIR__ . '/../components/sidebar.php';
                 <div class="modal-body">
                     Are you sure you want to delete this category?
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <a href="" id="confirmDeleteBtn" class="btn btn-danger">Delete</a>
-                </div>
+                <form method="POST" action="/admin/categories/delete">
+
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" id="confirmDeleteBtn" name="id" value="">
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Delete</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -167,9 +173,7 @@ include __DIR__ . '/../components/sidebar.php';
     document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".delete-btn").forEach(button => {
             button.addEventListener("click", function () {
-                let categoryId = this.getAttribute("data-id");
-                let deleteUrl = "/admin/categories/" + categoryId + "/delete";
-                document.getElementById("confirmDeleteBtn").setAttribute("href", deleteUrl);
+                document.getElementById("confirmDeleteBtn").setAttribute("value", this.getAttribute("data-id"));
             });
         });
     });

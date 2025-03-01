@@ -37,9 +37,9 @@ Route::get('/admin/categories/create', CategoryController::class, 'create');
 Route::post('/admin/categories/store', CategoryController::class, 'store');
 
 Route::get('/admin/categories/edit/{id}', CategoryController::class, 'edit'); // {id}/edit
-Route::post('/admin/categories/edit', CategoryController::class, 'update');
+Route::put('/admin/categories/edit', CategoryController::class, 'update');
 
-Route::get('/admin/categories/{id}/delete', CategoryController::class, 'destroy');
+Route::delete('/admin/categories/delete', CategoryController::class, 'destroy');
 
 
 //user route

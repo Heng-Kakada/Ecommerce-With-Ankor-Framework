@@ -19,7 +19,7 @@ class CategoryController extends BaseController
     {
         $categories = $this->categoryService->getCategories();
 
-        Response::view('dashboard/categories/categories.view', ['categories'=> $categories]);
+        Response::view('dashboard/categories/categories.view', ['categories' => $categories]);
     }
 
     public function create()
@@ -30,47 +30,51 @@ class CategoryController extends BaseController
     public function edit($id)
     {
         $category = $this->categoryService->getCategoryById($id);
-        Response::view('dashboard/categories/update.view', ['category'=> $category]);
+        Response::view('dashboard/categories/update.view', ['category' => $category]);
     }
+
     public function store()
     {
         $name = pk_request('name');
         $description = pk_request('description');
         try {
-            if ($this->categoryService->createCategory(['name' => $name, 'description' => $description])) {
-                Response::redirect('/admin/categories');
-            }
-            // Response::redirect('/admin/categories/create');
+            $this->queryResponse($this->categoryService->createCategory(['name' => $name, 'description' => $description]));
         } catch (ValidationException $validationException) {
-            
             Response::errors($validationException->getErrors(), 0, true)::previousUrl();
         }
     }
+
     public function update()
     {
         $id = pk_request('id');
         $name = pk_request('name');
         $description = pk_request('description');
         try {
-            if ($this->categoryService->updateCategory($id, ['name' => $name, 'description' => $description])) {
-                Response::redirect('/admin/categories');
-            }
-            // Response::redirect('/admin/categories/create');
+            $this->queryResponse($this->categoryService->updateCategory($id, ['name' => $name, 'description' => $description]));
         } catch (ValidationException $validationException) {
-            
             Response::errors($validationException->getErrors(), 0, true)::previousUrl();
         }
-
     }
-    public function destroy($id)
+
+    public function destroy()
     {
-        if ($this->categoryService->deleteCategory($id)) {
-            Response::redirect('/admin/categories');
+        $id = pk_request('id');
+        try {
+            $this->queryResponse($this->categoryService->deleteCategory($id));
+        } catch (ValidationException $validationException) {
+            Response::errors($validationException->getErrors(), 0, true)::previousUrl();
         }
     }
+
     public function show($id)
     {
         Response::view('user/products/product.view', ['id' => $id]);
     }
 
+    private function queryResponse($condition)
+    {
+        if ($condition) {
+            Response::redirect('/admin/categories');
+        }
+    }
 }
