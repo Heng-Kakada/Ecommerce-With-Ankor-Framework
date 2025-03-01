@@ -1,8 +1,10 @@
 <?php
 return array (
-  'AuthController' => 'src/controllers/AuthController.php',
-  'CategoryController' => 'src/controllers/CategoryController.php',
-  'DashboardController' => 'src/controllers/DashboardController.php',
-  'HomeController' => 'src/controllers/HomeController.php',
-  'ProductController' => 'src/controllers/ProductController.php',
+  'DashBoardCategoryController' => 'src/controllers/dashboard/DashBoardCategoryController.php',
+  'DashboardController' => 'src/controllers/dashboard/DashboardController.php',
+  'DashBoardProductController' => 'src/controllers/dashboard/DashBoardProductController.php',
+  'AuthController' => 'src/controllers/user/AuthController.php',
+  'CartController' => 'src/controllers/user/CartController.php',
+  'HomeController' => 'src/controllers/user/HomeController.php',
+  'ProductController' => 'src/controllers/user/ProductController.php',
 );

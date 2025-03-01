@@ -51,3 +51,18 @@ function pk_request($key)
 {
     return $_POST[$key];
 }
+
+function pk_isCurrentUrl($value)
+{
+    return $_SERVER['REQUEST_URI'] === $value;
+}
+
+function pk_getCurrentUrl()
+{
+    return $_SERVER['REQUEST_URI'];
+}
+
+function pk_filter_currentUrl()
+{
+    return str_replace(['/'], '', strtok(pk_getCurrentUrl(), '?'));
+}
