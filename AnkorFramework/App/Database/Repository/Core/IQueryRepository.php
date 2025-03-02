@@ -6,5 +6,5 @@ use AnkorFramework\App\Database\Core\Schema\AbstractSchema;
 interface IQueryRepository
 {
     public function count();
-    public function findById($id);
+    public function findById($id, $column);
 }

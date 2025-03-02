@@ -1,6 +1,5 @@
 <?php
 namespace src\services\user;
-
 use src\repositories\user\ProductRepository;
 
 class ProductService
@@ -10,10 +9,4 @@ class ProductService
     {
         $this->productRepository = $productRepository;
     }
-
-    public function getProducts()
-    {
-        dd($this->productRepository->findById(1));
-    }
-
 }

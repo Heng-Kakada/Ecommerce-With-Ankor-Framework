@@ -3,13 +3,13 @@ namespace AnkorFramework\App\Database\Repository;
 
 use AnkorFramework\App\Database\Core\Database;
 use AnkorFramework\App\Database\Core\Schema\AbstractSchema;
-use AnkorFramework\App\Database\Core\Schema\Schema;
-use Exception;
 use AnkorFramework\App\Database\Repository\Core\IRepository;
 use AnkorFramework\App\Database\Repository\Core\ICrudRepository;
 use AnkorFramework\App\Database\Repository\Core\IQueryRepository;
 use AnkorFramework\App\Database\Repository\Implementation\CrudRepositoryImpl;
 use AnkorFramework\App\Database\Repository\Implementation\QueryRepositoryImpl;
+use AnkorFramework\App\Exception\ResponeException;
+use PDOException;
 
 class Repository extends AbstractSchema implements IRepository
 {
@@ -18,56 +18,56 @@ class Repository extends AbstractSchema implements IRepository
 
     public function __construct(QueryRepositoryImpl $queryRepository, CrudRepositoryImpl $crudRepository, Database $database)
     {
-        if (!isset($this->table)) {
-            throw new Exception("Table name must be set in the your repository.");
+        try {
+            if (!isset($this->table) || $this->table === "") {
+                throw new PDOException("Table name must be set in the your repository.");
+            }
+
+            $this->crudRepository = $crudRepository;
+            $this->queryRepository = $queryRepository;
+            $this->database = $database;
+
+            if ($queryRepository instanceof QueryRepositoryImpl) {
+                $queryRepository->setTableName($this->table);
+                $queryRepository->setDatabase($database);
+            }
+
+            if ($crudRepository instanceof CrudRepositoryImpl) {
+                $crudRepository->setTableName($this->table);
+                $crudRepository->setDatabase($database);
+            }
+        } catch (PDOException $e) {
+            ResponeException::show($e->getMessage());
         }
-
-        $this->crudRepository = $crudRepository;
-        $this->queryRepository = $queryRepository;
-        $this->database = $database;
-
-        if ($queryRepository instanceof QueryRepositoryImpl) {
-            $queryRepository->setTableName($this->table);
-            $queryRepository->setDatabase($database);
-        }
-        if ($crudRepository instanceof CrudRepositoryImpl) {
-            $crudRepository->setTableName($this->table);
-            $crudRepository->setDatabase($database);
-        }
     }
 
-    public function delete()
+    public function delete($id): bool
     {
-        $this->crudRepository->delete();
+        return $this->crudRepository->delete($id);
     }
 
-    public function find(): array
+    public function find($column = "*", $criteria = "", $clause = ""): array
     {
-        return $this->crudRepository->find();
+        return $this->crudRepository->find($column, $criteria, $clause);
     }
 
-    public function save()
+    public function save(array $data): bool
     {
-        $this->crudRepository->save();
+        return $this->crudRepository->save($data);
     }
 
-    public function update()
+    public function update($id, array $data): bool
     {
-        $this->crudRepository->update();
+        return $this->crudRepository->update($id, $data);
     }
 
-    public function count()
+    public function count(): int
     {
-        $this->queryRepository->count();
+        return $this->queryRepository->count();
     }
 
-    public function setTableName($tableName)
+    public function findById($id, $column = "*"): array
     {
-        $this->table = $tableName;
-    }
-
-    public function findById($id): array
-    {
-        return $this->queryRepository->findById($id);
+        return $this->queryRepository->findById($id, $column);
     }
 }
