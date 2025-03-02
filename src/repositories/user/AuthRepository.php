@@ -1,7 +1,7 @@
 <?php
 namespace src\repositories\user;
 
-use AnkorFramework\App\Database\Database;
+use AnkorFramework\App\Database\Core\Database;
 
 
 

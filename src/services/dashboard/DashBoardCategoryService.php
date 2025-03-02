@@ -12,17 +12,16 @@ class DashBoardCategoryService
     {
         $this->categoryRepository = $categoryRepository;
     }
-
     public function getCategories(): array
     {
-        return $this->categoryRepository->findAllCategory();
+        return $this->categoryRepository->find();
     }
     public function getCategoryCBO():array{
         return $this->categoryRepository->findAllCategory();
     }
     public function getCategoryById($id): array
     {
-        return $this->categoryRepository->findCategoryById($id);
+        return $this->categoryRepository->findById($id);
     }
     public function createCategory($data): bool
     {
