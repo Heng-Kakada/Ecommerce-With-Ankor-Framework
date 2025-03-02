@@ -23,24 +23,33 @@ include __DIR__ . '/../components/sidebar.php';
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Product Information</h5>
+                        <?php
+                        // dd($data);
+                        // dd($data['categories'])
+                        // die();
+                        ?>
+                        <form method="POST" action="/admin/products/edit" enctype="multipart/form-data">
+                            <input type="hidden" name="_method" value="PUT">
+                            <input type="hidden" name="id" value="<?= $data['products']['id'] ?>">
 
-                        <form method="POST" action="/products/update" class="needs-validation" novalidate enctype="multipart/form-data">
-                            <input type="hidden" name="id" value="1">
-                            
                             <div class="row mb-3">
                                 <label for="productName" class="col-sm-2 col-form-label">Product Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="productName" name="name" 
-                                           value="Wireless Noise Cancelling Headphones" required>
-                                    <div class="invalid-feedback">Please enter the product name.</div>
+                                    <input type="text" class="form-control" id="productName" name="name"
+                                        value="<?= $data['products']['name'] ?>">
+                                    <?php if (isset($errors[0]['name'])): ?>
+                                        <div class="errors-validate">
+                                            <?= $errors[0]['name'] ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <label for="productDescription" class="col-sm-2 col-form-label">Description</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" id="productDescription" name="description" 
-                                              rows="4">Premium wireless headphones with advanced noise cancellation technology, crystal clear sound, and 30-hour battery life. Comfort meets high-performance audio.</textarea>
+                                    <textarea class="form-control" id="productDescription" name="description"
+                                        rows="4"><?= $data['products']['description'] ?></textarea>
                                 </div>
                             </div>
 
@@ -49,36 +58,48 @@ include __DIR__ . '/../components/sidebar.php';
                                 <div class="col-sm-10">
                                     <div class="input-group">
                                         <span class="input-group-text">$</span>
-                                        <input type="number" class="form-control" id="productPrice" name="price" 
-                                               step="0.01" value="249.99" required>
+                                        <input type="number" class="form-control" id="productPrice" name="price"
+                                            step="0.01" value="<?= $data['products']['price'] ?>">
                                     </div>
-                                    <div class="invalid-feedback">Please enter the product price.</div>
+                                    <?php if (isset($errors[0]['name'])): ?>
+                                        <div class="errors-validate">
+                                            <?= $errors[0]['name'] ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <label for="productCategory" class="col-sm-2 col-form-label">Category</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" id="productCategory" name="category" required>
-                                        <option value="">Choose category...</option>
-                                        <option value="electronics" selected>Electronics</option>
-                                        <option value="clothing">Clothing</option>
-                                        <option value="books">Books</option>
-                                        <option value="accessories">Accessories</option>
+                                    <select class="form-select" id="productCategory" name="category">
+                                        <?php if (isset($data['categories'])): ?>
+                                            <?php foreach ($data['categories'] as $category): ?>
+                                                <option <?php if ($category['id'] == $data['products']['category_id'])
+                                                    echo 'selected'; ?> value="<?= $category['id'] . "_" . $category['name'] ?>">
+                                                    <?= $category['name'] ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </select>
-                                    <div class="invalid-feedback">Please select a category.</div>
+                                    <?php if (isset($errors[0]['category'])): ?>
+                                        <div class="errors-validate">
+                                            <?= $errors[0]['category'] ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <label for="productImage" class="col-sm-2 col-form-label">Product Image</label>
                                 <div class="col-sm-10">
-                                    <input class="form-control" type="file" id="productImage" name="image" 
-                                           accept="image/*">
-                                    <div class="mt-2">
-                                        <img src="/../dashboard/assets/img/product-1.jpg" alt="Current Product Image" 
-                                             style="max-width: 200px; max-height: 200px;">
-                                        <input type="hidden" name="current_image" value="">
+                                    <input class="form-control" type="file" id="productImage" name="image"
+                                        accept="image/jpg, image/png, image/jpeg">
+                                    <div class="mt-2" id="imagePreview">
+                                        <img id="currentImage" src="<?= $data['products']['image'] ?>"
+                                            alt="Current Product Image" style="max-width: 200px; max-height: 200px;">
+                                        <input type="hidden" name="image"
+                                            value="<?= $data['products']['image'] ?>">
                                     </div>
                                     <small class="form-text text-muted">
                                         Leave blank to keep the current image
@@ -89,16 +110,22 @@ include __DIR__ . '/../components/sidebar.php';
                             <div class="row mb-3">
                                 <label for="productStock" class="col-sm-2 col-form-label">Stock Quantity</label>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="productStock" name="stock" 
-                                           value="75" required>
-                                    <div class="invalid-feedback">Please enter the stock quantity.</div>
+                                    <input type="number" class="form-control" id="productStock" name="stock"
+                                        value="<?= $data['products']['stock'] ?>">
+                                    <?php if (isset($errors[0]['stock'])): ?>
+                                        <div class="errors-validate">
+                                            <?= $errors[0]['stock'] ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <div class="col-sm-10 offset-sm-2">
-                                    <button type="submit" class="btn btn-primary me-2">Update Product</button>
-                                    <a href="/admin/products"><button type="button" class="btn btn-secondary">Cancel</button></a>
+                                    <button type="submit" class="btn btn-primary me-2" name="submit">Update
+                                        Product</button>
+                                    <a href="/admin/products"><button type="button"
+                                            class="btn btn-secondary">Cancel</button></a>
                                 </div>
                             </div>
                         </form>
@@ -108,6 +135,52 @@ include __DIR__ . '/../components/sidebar.php';
         </div>
     </section>
 </main>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let fileInput = document.getElementById("productImage");
+        let currentImage = document.getElementById("currentImage");
+        let imagePreviewContainer = document.getElementById("imagePreview");
+
+        fileInput.addEventListener("change", function (event) {
+            if (event.target.files.length > 0) {
+                // Hide the current image
+                if (currentImage) {
+                    currentImage.style.display = "none";
+                }
+
+                // Check if a new preview already exists
+                let newImage = document.getElementById("newImagePreview");
+                if (!newImage) {
+                    newImage = document.createElement("img");
+                    newImage.id = "newImagePreview";
+                    newImage.style.maxWidth = "200px";
+                    newImage.style.maxHeight = "200px";
+                    newImage.style.marginTop = "10px";
+                    imagePreviewContainer.appendChild(newImage);
+                }
+
+                // Read the new image and set it as preview
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    newImage.src = e.target.result;
+                };
+                reader.readAsDataURL(event.target.files[0]);
+            } else {
+                // Show the current image if no new file is selected
+                if (currentImage) {
+                    currentImage.style.display = "block";
+                }
+
+                // Remove the new preview if the file is cleared
+                let newImage = document.getElementById("newImagePreview");
+                if (newImage) {
+                    newImage.remove();
+                }
+            }
+        });
+    });
+</script>
 
 <?php
 include __DIR__ . '/../components/foot.php';

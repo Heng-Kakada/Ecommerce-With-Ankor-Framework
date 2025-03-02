@@ -8,11 +8,11 @@ class DashBoardProductRepository extends Repository
 {
 
     public string $table = "tbproducts";
-    private $selectAllQeury = "select p.id, p.name, p.price, p.stock, c.name as category, p.image from tbproducts p inner join tbcategory c on p.category_id = c.id";
+    private $selectAllQeury = "select p.id, p.name, p.description, p.price, p.stock, c.id as category_id, c.name as category_name, p.image from tbproducts p inner join tbcategory c on p.category_id = c.id";
      
     public function findAllProducts(): array
     {
-        return $this->database->query($this->selectAllQeury . " order by id;")->get();
+        return $this->database->query($this->selectAllQeury . " order by p.id;")->get();
     }
     public function findProductById(int $id): array
     {

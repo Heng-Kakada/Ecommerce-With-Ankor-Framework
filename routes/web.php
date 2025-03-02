@@ -43,9 +43,9 @@ Route::get('/admin/products', DashBoardProductController::class, 'index'); // li
 Route::get('/admin/products/{id}', DashBoardProductController::class, 'show'); // show product detail (view)
 Route::get('/admin/products/create', DashBoardProductController::class, 'create'); // load create product view
 Route::post('/admin/products/store', DashBoardProductController::class, 'store'); // store product to db
-
 Route::get('/admin/products/edit/{id}', DashBoardProductController::class, 'edit'); //load update product view
 Route::put('/admin/products/edit', DashBoardProductController::class, 'update'); // update existing product
+Route::delete('/admin/products/delete', DashBoardProductController::class, 'destroy');
 
 
 //category route

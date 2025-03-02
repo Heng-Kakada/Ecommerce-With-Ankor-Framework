@@ -30,6 +30,20 @@ class DashBoardProductService
     }
     public function createProduct($data): bool
     {
+        $this->validateProduct($data);
+        return $this->productRepository->save($data);
+    }
+    public function updateProduct($id, $data): bool
+    {
+        $this->validateProduct($data);
+        return $this->productRepository->update($id, $data);
+    }
+    public function deleteCategory($id): bool
+    {
+        return $this->productRepository->delete($id);
+    }
+    private function validateProduct($data)
+    {
         $rules = [
             'name' => 'required|string|max:100',
             'description' => 'string|max:255',
@@ -51,7 +65,6 @@ class DashBoardProductService
             ],
             $rules
         );
-        return $this->productRepository->save($data);
     }
 
 }
