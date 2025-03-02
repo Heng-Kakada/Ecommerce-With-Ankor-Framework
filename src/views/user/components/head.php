@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="/../resources/user/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/../resources/user/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/../resources/user/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/../resources/user/css/login-style.css" type="text/css">
 </head>
 
 <body>

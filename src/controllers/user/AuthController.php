@@ -38,9 +38,24 @@ class AuthController extends BaseController
         }
     }
 
+    public function signup()
+    {
+        Response::view('user/register.view');
+    }
+
     public function register()
     {
-        // Register method code here
+        $username = pk_request('username');
+        $email = pk_request('email');
+        $password = pk_request('password');
+        $repassword = pk_request('re-password');
+
+        dd($username . " " . $email . " " . $password . " " . $repassword);
+    }
+
+    public function forgot()
+    {
+        Response::view('user/forgot.view');
     }
 
     public function logout()

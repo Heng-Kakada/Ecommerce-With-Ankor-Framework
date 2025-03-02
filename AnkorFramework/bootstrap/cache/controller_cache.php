@@ -5,6 +5,7 @@ return array (
   'DashBoardProductController' => 'src/controllers/dashboard/DashBoardProductController.php',
   'AuthController' => 'src/controllers/user/AuthController.php',
   'CartController' => 'src/controllers/user/CartController.php',
+  'CategoryController' => 'src/controllers/user/CategoryController.php',
   'HomeController' => 'src/controllers/user/HomeController.php',
   'ProductController' => 'src/controllers/user/ProductController.php',
 );

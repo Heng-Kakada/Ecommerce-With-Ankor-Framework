@@ -64,5 +64,16 @@ function pk_getCurrentUrl()
 
 function pk_filter_currentUrl()
 {
-    return str_replace(['/'], '', strtok(pk_getCurrentUrl(), '?'));
+    $name = str_replace(['/'], '-', strtok(pk_getCurrentUrl(), '?'));
+    return ltrim($name, '-');
+}
+
+function pk_route_path($path, $attribute = '')
+{
+    echo "<a href='$path' $attribute >";
+}
+
+function pk_end_route_path()
+{
+    echo "</a>";
 }
