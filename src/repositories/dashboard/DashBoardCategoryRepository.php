@@ -1,7 +1,7 @@
 <?php
 namespace src\repositories\dashboard;
 
-use AnkorFramework\App\Database\Database;
+use AnkorFramework\App\Database\Core\Database;
 
 class DashBoardCategoryRepository
 {

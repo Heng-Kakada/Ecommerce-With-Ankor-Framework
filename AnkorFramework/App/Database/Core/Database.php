@@ -1,6 +1,6 @@
 <?php
 
-namespace AnkorFramework\App\Database;
+namespace AnkorFramework\App\Database\Core;
 
 use PDO;
 
@@ -8,7 +8,6 @@ class Database
 {
     public $connection;
     public $statement;
-
     public function __construct()
     {
         $config = require pk_base_path("/AnkorFramework/config/DatabaseConfig.php");
@@ -18,12 +17,6 @@ class Database
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]);
     }
-
-    public function connect()
-    {
-        echo "Connected to MySQL";
-    }
-
     public function query($query, $param = [])
     {
         $this->statement = $this->connection->prepare($query);
