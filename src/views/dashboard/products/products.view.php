@@ -49,7 +49,7 @@ include __DIR__ . '/../components/sidebar.php';
                                             <th scope="row"><?= $product['id'] ?></th>
                                             <td>
                                                 <img src="<?= $product['image'] ?>" alt="Product" class="img-fluid rounded"
-                                                    style="max-width: 120px;">
+                                                    style="max-width: 120px;max-height: 100px;">
                                             </td>
                                             <td><?= $product['name'] ?></td> <!--name-->
                                             <td><?= $product['category'] ?></td> <!--category-->

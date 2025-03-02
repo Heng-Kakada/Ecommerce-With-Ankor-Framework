@@ -9,6 +9,7 @@ include __DIR__ . '/../components/breadcrumb.php';
 //     'img' => '/../resources/user/img/shop/product-1.jpg'
 // ];
 $products = $data['products'];
+
 ?>
 
 <!-- Shop Section Begin -->
@@ -17,7 +18,7 @@ $products = $data['products'];
         <?php
         require __DIR__ . "/shop-search.view.php";
 
-        if (isset($products)) {
+        if (isset($products) && !empty($products)) {
             require __DIR__ . "/../products/product-card.view.php";
         } else {
             echo "<p style='text-align:center; font-size:30px' >Sorry! No Cake Available</p>";

@@ -11,6 +11,11 @@ class ProductService
     }
     public function getAllProducts()
     {
-        return $this->productRepository->find("name,description,price,image");
+        return $this->productRepository->find("id,name,description,price,image,category_name");
     }
+    public function getRandomProduct(int $limit = 4)
+    {
+        return $this->productRepository->find('id,name,price,image,category_name', '', "order by rand() limit $limit");
+    }
+
 }

@@ -5,7 +5,7 @@
                 <div class="product__item__pic set-bg"
                     data-setbg="<?= $product['image'] ?? '/../resources/user/img/shop/product-1.jpg' ?>">
                     <div class="product__label">
-                        <span><?= $product['category'] ?? "None" ?></span>
+                        <span><?= $product['category_name'] ?? "None" ?></span>
                     </div>
                 </div>
                 <div class="product__item__text">
