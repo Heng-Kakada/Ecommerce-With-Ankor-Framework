@@ -18,8 +18,9 @@ class AppCotainer
 
     private function buildDependencies(ReflectionClass $reflection)
     {
-
         $constructor = $reflection->getConstructor();
+
+
         if (!$constructor) {
             return [];
         }

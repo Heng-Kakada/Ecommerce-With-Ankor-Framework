@@ -63,42 +63,6 @@ include __DIR__ . '/../components/sidebar.php';
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
-                                <!-- <tr>
-                                    <th scope="row">2</th>
-
-                                    <td>Smart Watch</td>
-                                    <td>Electronics</td>
-
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <a href="/admin/categories/edit" class="btn btn-info btn-sm" title="Edit">
-                                                <i class="bi bi-pencil"></i>
-                                            </a>
-                                            <button class="btn btn-danger btn-sm" title="Delete" data-bs-toggle="modal"
-                                                data-bs-target="#deleteProductModal">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-
-                                    <td>Wireless Earbuds</td>
-                                    <td>Electronics</td>
-
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <a href="/admin/categories/edit" class="btn btn-info btn-sm" title="Edit">
-                                                <i class="bi bi-pencil"></i>
-                                            </a>
-                                            <button class="btn btn-danger btn-sm" title="Delete" data-bs-toggle="modal"
-                                                data-bs-target="#deleteProductModal">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -161,7 +125,7 @@ include __DIR__ . '/../components/sidebar.php';
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Delete</button>
+                        <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
                     </div>
                 </form>
             </div>

@@ -30,7 +30,7 @@ include __DIR__ . '/../components/sidebar.php';
                             <div class="row mb-3">
                                 <label for="categoryName" class="col-sm-2 col-form-label">Category Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="productName" name="name"
+                                    <input type="text" class="form-control" id="categoryName" name="name"
                                         value="<?= $data['category']['name'] ?>">
 
                                     <?php if (isset($errors[0]['name'])): ?>
@@ -42,9 +42,9 @@ include __DIR__ . '/../components/sidebar.php';
                             </div>
 
                             <div class="row mb-3">
-                                <label for="productDescription" class="col-sm-2 col-form-label">Description</label>
+                                <label for="categoryDescription" class="col-sm-2 col-form-label">Description</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" id="productDescription" name="description"
+                                    <textarea class="form-control" id="categoryDescription" name="description"
                                         rows="4"><?= $data['category']['description'] ?></textarea>
 
                                     <?php if (isset($errors[0]['description'])): ?>
