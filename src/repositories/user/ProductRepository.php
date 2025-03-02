@@ -5,5 +5,5 @@ use AnkorFramework\App\Database\Repository\Repository;
 
 class ProductRepository extends Repository
 {
-    public string $table = "";
+    public string $table = "tbproducts";
 }

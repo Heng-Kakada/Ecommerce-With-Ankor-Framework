@@ -9,4 +9,8 @@ class ProductService
     {
         $this->productRepository = $productRepository;
     }
+    public function getAllProducts()
+    {
+        return $this->productRepository->find("name,description,price,image");
+    }
 }

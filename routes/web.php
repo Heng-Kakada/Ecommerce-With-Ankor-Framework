@@ -19,8 +19,17 @@ Route::get('/contact', HomeController::class, 'contact');
 
 Route::get("/login", AuthController::class, 'login');
 Route::post('/login-execute', AuthController::class, 'store');
-Route::get('/shop', ProductController::class, 'index');
 
+/* 
+    All Product Route
+*/
+
+Route::get('/shop', ProductController::class, 'index');
+Route::get('/product/{id}', ProductController::class, 'show');
+
+/* 
+    Cart Route
+*/
 Route::get('/cart', CartController::class, 'index');
 
 /* 

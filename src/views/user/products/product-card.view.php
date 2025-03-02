@@ -1,10 +1,11 @@
 <div class="row">
-    <?php for ($i = 1; $i <= 12; $i++): ?>
+    <?php foreach ($products as $product): ?>
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="product__item">
-                <div class="product__item__pic set-bg" data-setbg="<?= $product['img'] ?>">
+                <div class="product__item__pic set-bg"
+                    data-setbg="<?= $product['image'] ?? '/../resources/user/img/shop/product-1.jpg' ?>">
                     <div class="product__label">
-                        <span><?= $product['category'] ?></span>
+                        <span><?= $product['category'] ?? "None" ?></span>
                     </div>
                 </div>
                 <div class="product__item__text">
@@ -16,5 +17,5 @@
                 </div>
             </div>
         </div>
-    <?php endfor; ?>
+    <?php endforeach; ?>
 </div>
