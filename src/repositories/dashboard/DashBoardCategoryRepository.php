@@ -16,6 +16,10 @@ class DashBoardCategoryRepository
     {
         return $this->database->query("select * from tbcategory;")->get();
     }
+    public function findAllCategoryCBO(): array
+    {
+        return $this->database->query("select id, name from tbcategory;")->get();
+    }
 
     public function findCategoryById($id): array
     {

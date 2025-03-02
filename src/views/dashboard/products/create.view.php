@@ -1,7 +1,14 @@
 <?php
+use AnkorFramework\App\Http\Security\HttpSession;
+$errors = HttpSession::get('errors');
+HttpSession::unflash();
+?>
+
+<?php
 require __DIR__ . '/../components/head.php';
 include __DIR__ . '/../components/header.php';
 include __DIR__ . '/../components/sidebar.php';
+
 ?>
 <main id="main" class="main">
 
@@ -23,12 +30,16 @@ include __DIR__ . '/../components/sidebar.php';
                     <div class="card-body">
                         <h5 class="card-title">Product Information</h5>
 
-                        <form method="POST" action="/products/store" class="needs-validation" novalidate>
+                        <form method="POST" action="/admin/products/store">
                             <div class="row mb-3">
                                 <label for="productName" class="col-sm-2 col-form-label">Product Name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="productName" name="name" required>
-                                    <div class="invalid-feedback">Please enter the product name.</div>
+                                    <input type="text" class="form-control" id="productName" name="name">
+                                    <?php if (isset($errors[0]['name'])): ?>
+                                        <div class="errors-validate">
+                                            <?= $errors[0]['name'] ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
@@ -37,6 +48,11 @@ include __DIR__ . '/../components/sidebar.php';
                                 <div class="col-sm-10">
                                     <textarea class="form-control" id="productDescription" name="description"
                                         rows="4"></textarea>
+                                    <?php if (isset($errors[0]['description'])): ?>
+                                        <div class="errors-validate">
+                                            <?= $errors[0]['description'] ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
@@ -45,24 +61,34 @@ include __DIR__ . '/../components/sidebar.php';
                                 <div class="col-sm-10">
                                     <div class="input-group">
                                         <span class="input-group-text">$</span>
-                                        <input type="number" class="form-control" id="productPrice" name="price" 
-                                               step="0.01" value="249.99" required>
+                                        <input type="number" class="form-control" id="productPrice" name="price"
+                                            step="0.01">
+
                                     </div>
-                                    <div class="invalid-feedback">Please enter the product price.</div>
+                                    <?php if (isset($errors[0]['price'])): ?>
+                                        <div class="errors-validate">
+                                            <?= $errors[0]['price'] ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <label for="productCategory" class="col-sm-2 col-form-label">Category</label>
                                 <div class="col-sm-10">
-                                    <select class="form-select" id="productCategory" name="category" required>
+                                    <select class="form-select" id="productCategory" name="category">
                                         <option selected disabled value="">Choose category...</option>
-                                        <option value="electronics">Electronics</option>
-                                        <option value="clothing">Clothing</option>
-                                        <option value="books">Books</option>
-                                        <option value="accessories">Accessories</option>
+                                        <?php if (isset($data['categories'])): ?>
+                                            <?php foreach ($data['categories'] as $category): ?>
+                                                <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                                            <?php endforeach; ?>
+                                        <?php endif; ?>
                                     </select>
-                                    <div class="invalid-feedback">Please select a category.</div>
+                                    <?php if (isset($errors[0]['category'])): ?>
+                                        <div class="errors-validate">
+                                            <?= $errors[0]['category'] ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
@@ -70,15 +96,20 @@ include __DIR__ . '/../components/sidebar.php';
                                 <label for="productImage" class="col-sm-2 col-form-label">Product Image</label>
                                 <div class="col-sm-10">
                                     <input class="form-control" type="file" id="productImage" name="image"
-                                        accept="image/*">
+                                        accept="image/jpg, image/png, image/jpeg">
                                 </div>
                             </div>
+                            
 
                             <div class="row mb-3">
                                 <label for="productStock" class="col-sm-2 col-form-label">Stock Quantity</label>
                                 <div class="col-sm-10">
-                                    <input type="number" class="form-control" id="productStock" name="stock" required>
-                                    <div class="invalid-feedback">Please enter the stock quantity.</div>
+                                    <input type="number" class="form-control" id="productStock" name="stock">
+                                    <?php if (isset($errors[0]['stock'])): ?>
+                                        <div class="errors-validate">
+                                            <?= $errors[0]['stock'] ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
 
@@ -86,12 +117,15 @@ include __DIR__ . '/../components/sidebar.php';
 
                             <div class="row mb-3">
                                 <div class="col-sm-10 offset-sm-2">
-                                    <button type="submit" class="btn btn-primary me-2">Create Product</button>
-                                    <a href="/admin/products"><button type="button" class="btn btn-secondary">Cancel</button></a>
+                                    <button type="submit" class="btn btn-primary me-2" name = 'submit'>Create Product</button>
+                                    <a href="/admin/products"><button type="button"
+                                            class="btn btn-secondary">Cancel</button></a>
                                 </div>
                             </div>
                         </form>
+                        
                     </div>
+                    
                 </div>
             </div>
         </div>

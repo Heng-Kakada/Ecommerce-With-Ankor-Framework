@@ -17,6 +17,9 @@ class DashBoardCategoryService
     {
         return $this->categoryRepository->findAllCategory();
     }
+    public function getCategoryCBO():array{
+        return $this->categoryRepository->findAllCategory();
+    }
     public function getCategoryById($id): array
     {
         return $this->categoryRepository->findCategoryById($id);

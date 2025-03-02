@@ -27,13 +27,16 @@ Route::get('/cart', CartController::class, 'index');
 
 Route::get('/admin', DashboardController::class, 'index');
 
-
+Route::get('/admin/file_upload', DashboardController::class, 'file_upload');
+Route::post('/admin/upload', DashboardController::class, 'upload');
 //product route
 Route::get('/admin/products', DashBoardProductController::class, 'index'); // list products
 Route::get('/admin/products/{id}', DashBoardProductController::class, 'show'); // show product detail (view)
 Route::get('/admin/products/create', DashBoardProductController::class, 'create'); // load create product view
 Route::post('/admin/products/store', DashBoardProductController::class, 'store'); // store product to db
-Route::put('/admin/products/{id}/edit', DashBoardProductController::class, 'update'); // update existing product
+
+Route::get('/admin/products/edit/{id}', DashBoardProductController::class, 'edit'); //load update product view
+Route::put('/admin/products/edit', DashBoardProductController::class, 'update'); // update existing product
 
 
 //category route
