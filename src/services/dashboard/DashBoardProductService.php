@@ -1,6 +1,7 @@
 <?php
 namespace src\services\dashboard;
 
+use AnkorFramework\App\Validate\Validator;
 use src\repositories\dashboard\DashBoardProductRepository;
 
 class DashBoardProductService
@@ -11,8 +12,46 @@ class DashBoardProductService
     {
         $this->productRepository = $productRepository;
     }
-    public function getProducts()
+    public function getLastProductID()
     {
-        return $this->productRepository->get();
+        return $this->productRepository->findLast();
     }
+    public function getProducts(): array
+    {
+        return $this->productRepository->findAllProducts();
+    }
+    public function getProductById($id)
+    {
+        return $this->productRepository->findProductById($id);
+    }
+    public function getLast()
+    {
+        return $this->productRepository->findLast();
+    }
+    public function createProduct($data): bool
+    {
+        $rules = [
+            'name' => 'required|string|max:100',
+            'description' => 'string|max:255',
+            'price' => 'required|float',
+            'category_id' => 'required|int',
+            'image' => 'string',
+            'stock' => 'required|int',
+        ];
+
+
+        Validator::validate(
+            [
+                'name' => $data['name'],
+                'description' => $data['description'],
+                'price' => $data['price'],
+                'image' => $data['image'],
+                'stock' => $data['stock'],
+                'category_id' => $data['category_id']
+            ],
+            $rules
+        );
+        return $this->productRepository->save($data);
+    }
+
 }

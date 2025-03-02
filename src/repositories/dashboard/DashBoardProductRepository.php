@@ -2,17 +2,37 @@
 namespace src\repositories\dashboard;
 
 use AnkorFramework\App\Database\Core\Database;
+use AnkorFramework\App\Database\Repository\Repository;
 
-class DashBoardProductRepository
+class DashBoardProductRepository extends Repository
 {
-    private $database;
 
-    public function __construct(Database $database)
+    public string $table = "tbproducts";
+    private $selectAllQeury = "select p.id, p.name, p.price, p.stock, c.name as category, p.image from tbproducts p inner join tbcategory c on p.category_id = c.id";
+     
+    public function findAllProducts(): array
     {
-        $this->database = $database;
+        return $this->database->query($this->selectAllQeury . " order by id;")->get();
     }
-    public function get()
+    public function findProductById(int $id): array
     {
-        return $this->database->query("SELECT * FROM tbproducts;");
+
+        return $this->database->query($this->selectAllQeury . " where p.id = :id", ['id' => $id])->findAndFail();
     }
+
+
+    // public function save($data):bool
+    // {
+    //     return $this->database->query("insert into tbproducts(name, description, price, image, stock, category_id) 
+    //     values(:name, :description, :price, :image, :stock, :category)",
+    //         [
+    //             'name' => $data['name'],
+    //             'description' => $data['description'],
+    //             'price' => $data['price'],
+    //             'image' => $data['image'],
+    //             'stock' => $data['stock'],
+    //             'category' => $data['category']
+    //         ]
+    //     )->isExecuted();
+    // }
 }

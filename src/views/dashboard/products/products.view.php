@@ -2,6 +2,7 @@
 include __DIR__ . '/../components/head.php';
 include __DIR__ . '/../components/header.php';
 include __DIR__ . '/../components/sidebar.php';
+// include __DIR__ . '/upload.php';
 ?>
 
 
@@ -42,30 +43,34 @@ include __DIR__ . '/../components/sidebar.php';
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>
-                                        <img src="/../dashboard/assets/img/product-1.jpg" alt="Product"
-                                            class="img-fluid rounded" style="max-width: 50px;">
-                                    </td>
-                                    <td>Leather Jacket</td>
-                                    <td>Clothing</td>
-                                    <td>$199.99</td>
-                                    <td>50</td>
-                                    <td>
-                                        <div class="btn-group" role="group">
-                                            <a href="/admin/products/edit" class="btn btn-info btn-sm" title="Edit"
-                                                data-bs-toggle="modal" data-bs-target="#updateProductModal">
-                                                <i class="bi bi-pencil"></i>
-                                            </a>
-                                            <button class="btn btn-danger btn-sm" title="Delete" data-bs-toggle="modal"
-                                                data-bs-target="#deleteProductModal">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
+                                <?php if (isset($data['products'])): ?>
+                                    <?php foreach ($data['products'] as $product): ?>
+                                        <tr>
+                                            <th scope="row"><?= $product['id'] ?></th>
+                                            <td>
+                                                <img src="<?= $product['image'] ?>" alt="Product" class="img-fluid rounded"
+                                                    style="max-width: 120px;">
+                                            </td>
+                                            <td><?= $product['name'] ?></td> <!--name-->
+                                            <td><?= $product['category'] ?></td> <!--category-->
+                                            <td><?= $product['price'] ?></td> <!--price-->
+                                            <td><?= $product['stock'] ?></td> <!--stock-->
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <a href="/admin/products/edit/<?= $product['id'] ?>"
+                                                        class="btn btn-info btn-sm" title="Edit">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+                                                    <button class="btn btn-danger btn-sm" title="Delete" data-bs-toggle="modal"
+                                                        data-bs-target="#deleteProductModal" data-id=<?= $product['id'] ?>>
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                                <!-- <tr>
                                     <th scope="row">2</th>
                                     <td>
                                         <img src="/../dashboard/assets/img/product-2.jpg" alt="Product"
@@ -108,7 +113,7 @@ include __DIR__ . '/../components/sidebar.php';
                                             </button>
                                         </div>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>

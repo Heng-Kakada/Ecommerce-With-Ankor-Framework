@@ -70,4 +70,8 @@ class Repository extends AbstractSchema implements IRepository
     {
         return $this->queryRepository->findById($id, $column);
     }
+    public function findLast()
+    {
+        return $this->queryRepository->findLast();
+    }
 }

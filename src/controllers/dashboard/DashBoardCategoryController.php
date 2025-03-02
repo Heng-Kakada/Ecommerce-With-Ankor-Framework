@@ -19,7 +19,6 @@ class DashBoardCategoryController extends BaseController
     public function index()
     {
         $categories = $this->categoryService->getCategories();
-
         Response::view('dashboard/categories/categories.view', ['categories' => $categories]);
     }
 

@@ -3,6 +3,7 @@ namespace AnkorFramework\App\Validate;
 
 use AnkorFramework\App\Validate\Rule\DateRule;
 use AnkorFramework\App\Validate\Rule\EmailRule;
+use AnkorFramework\App\Validate\Rule\FloatRule;
 use AnkorFramework\App\Validate\Rule\IntegerRule;
 use AnkorFramework\App\Validate\Rule\MaxRule;
 use AnkorFramework\App\Validate\Rule\MinRule;
@@ -17,6 +18,7 @@ class Validator
         'required' => RequiredRule::class,
         'string' => StringRule::class,
         'integer' => IntegerRule::class,
+        'float' => FloatRule::class,
         'min' => MinRule::class,
         'max' => MaxRule::class,
         'email' => EmailRule::class,

@@ -15,4 +15,13 @@ class DashboardController extends BaseController
     {
         Response::view('contact.view');
     }
+
+    public function file_upload()
+    {
+        Response::view('dashboard/file_upload.view');
+    }
+    public function upload()
+    {
+        Response::view('dashboard/image.view');
+    }
 }
