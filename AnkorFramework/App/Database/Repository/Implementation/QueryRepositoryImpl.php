@@ -35,4 +35,8 @@ class QueryRepositoryImpl extends Schema implements IQueryRepository
         }
         return [];
     }
+    public function findLast()
+    {
+        return $this->database->query("select max(id) from $this->table")->findAndFail();
+    }
 }

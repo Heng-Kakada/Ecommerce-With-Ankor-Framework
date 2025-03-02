@@ -30,7 +30,7 @@ include __DIR__ . '/../components/sidebar.php';
                     <div class="card-body">
                         <h5 class="card-title">Product Information</h5>
 
-                        <form method="POST" action="/admin/products/store">
+                        <form method="POST" action="/admin/products/store" enctype="multipart/form-data">
                             <div class="row mb-3">
                                 <label for="productName" class="col-sm-2 col-form-label">Product Name</label>
                                 <div class="col-sm-10">
@@ -80,7 +80,7 @@ include __DIR__ . '/../components/sidebar.php';
                                         <option selected disabled value="">Choose category...</option>
                                         <?php if (isset($data['categories'])): ?>
                                             <?php foreach ($data['categories'] as $category): ?>
-                                                <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                                                <option value="<?= $category['id'] . "_" . $category['name']?>"><?= $category['name'] ?></option>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
                                     </select>
@@ -117,7 +117,7 @@ include __DIR__ . '/../components/sidebar.php';
 
                             <div class="row mb-3">
                                 <div class="col-sm-10 offset-sm-2">
-                                    <button type="submit" class="btn btn-primary me-2" name = 'submit'>Create Product</button>
+                                    <button type="submit" class="btn btn-primary me-2" name ="submit">Create Product</button>
                                     <a href="/admin/products"><button type="button"
                                             class="btn btn-secondary">Cancel</button></a>
                                 </div>

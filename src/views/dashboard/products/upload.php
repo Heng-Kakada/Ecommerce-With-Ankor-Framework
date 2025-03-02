@@ -17,16 +17,16 @@ $status = 'danger';
 // If file upload form is submitted 
 if(isset($_POST["submit"])){ 
     // Check whether user inputs are empty 
-    if(!empty($_FILES["productImage"]["name"])) { 
+    if(!empty($_FILES["image"]["name"])) { 
         // File info 
-        $file_name = basename($_FILES["productImage"]["name"]); 
+        $file_name = basename($_FILES["image"]["name"]); 
         $file_type = pathinfo($file_name, PATHINFO_EXTENSION); 
          
         // Allow certain file formats 
         $allowTypes = array('jpg','png','jpeg','gif'); 
         if(in_array($file_type, $allowTypes)){ 
             // File temp source 
-            $file_temp_src = $_FILES["productImage"]["tmp_name"]; 
+            $file_temp_src = $_FILES["image"]["tmp_name"]; 
              
             if(is_uploaded_file($file_temp_src)){ 
                 // Instantiate an Amazon S3 client 

@@ -7,4 +7,5 @@ interface IQueryRepository
 {
     public function count();
     public function findById($id, $column);
+    public function findLast();
 }

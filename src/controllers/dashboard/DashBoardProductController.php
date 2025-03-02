@@ -4,6 +4,7 @@ namespace src\controllers\dashboard;
 use AnkorFramework\App\Http\BaseController;
 use AnkorFramework\App\Http\Response;
 use AnkorFramework\App\Validate\ValidationException;
+use AnkorFramework\App\Resources\FileUpload\FileUpload;
 use src\services\dashboard\DashBoardCategoryService;
 use src\services\dashboard\DashBoardProductService;
 
@@ -40,20 +41,28 @@ class DashBoardProductController extends BaseController
     }
     public function store()
     {
+        $uploader = new FileUpload();
+        $uploader->uploadFile($_FILES['image'], $this->productService->getLast()['max(id)'] + 1);
+
+        $category = explode("_", pk_request('category'));
+        
+
         $name = pk_request('name');
         $description = pk_request('description');
-        $price = (float)pk_request('price');
-        $category = (int)pk_request('category');
-        $image = pk_request('image');
-        $stock = (int)pk_request('stock');
-        
+        $price = (float) pk_request('price');
+        $category_id = (int) $category[0];
+        $category_name = $category[1];
+        $image = $uploader->getImageURL();
+        $stock = (int) pk_request('stock');
+
 
         try {
             $this->queryResponse($this->productService->createProduct([
                 'name' => $name,
                 'description' => $description,
                 'price' => $price,
-                'category' => $category,
+                'category_id' => $category_id,
+                'category_name' => $category_name,
                 'image' => $image,
                 'stock' => $stock
             ]));

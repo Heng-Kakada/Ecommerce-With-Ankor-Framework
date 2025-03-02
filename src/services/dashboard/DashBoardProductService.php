@@ -12,6 +12,10 @@ class DashBoardProductService
     {
         $this->productRepository = $productRepository;
     }
+    public function getLastProductID()
+    {
+        return $this->productRepository->findLast();
+    }
     public function getProducts(): array
     {
         return $this->productRepository->findAllProducts();
@@ -20,26 +24,34 @@ class DashBoardProductService
     {
         return $this->productRepository->findProductById($id);
     }
+    public function getLast()
+    {
+        return $this->productRepository->findLast();
+    }
     public function createProduct($data): bool
     {
-        dd($data);
-        dd($_FILES);
-        die();
-        Validator::validate([
-            'name' => $data['name'],
-            'description' => $data['description'],
-            'price' => $data['price'],
-            'image' => $data['image'],
-            'stock' => $data['stock'],
-            'category' => $data['category']
-        ], [
+        $rules = [
             'name' => 'required|string|max:100',
             'description' => 'string|max:255',
             'price' => 'required|float',
-            'category' => 'required|int',
+            'category_id' => 'required|int',
             'image' => 'string',
             'stock' => 'required|int',
-        ]);
+        ];
+
+
+        Validator::validate(
+            [
+                'name' => $data['name'],
+                'description' => $data['description'],
+                'price' => $data['price'],
+                'image' => $data['image'],
+                'stock' => $data['stock'],
+                'category_id' => $data['category_id']
+            ],
+            $rules
+        );
         return $this->productRepository->save($data);
     }
+
 }

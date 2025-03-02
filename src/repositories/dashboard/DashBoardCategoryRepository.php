@@ -7,4 +7,6 @@ use AnkorFramework\App\Database\Repository\Repository;
 class DashBoardCategoryRepository extends Repository
 {
     public string $table = "tbcategory";
+
+    
 }
