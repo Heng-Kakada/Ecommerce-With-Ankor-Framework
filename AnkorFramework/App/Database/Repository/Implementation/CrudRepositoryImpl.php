@@ -24,7 +24,7 @@ class CrudRepositoryImpl extends Schema implements ICrudRepository
             if (empty($column))
                 $column = "*";
             $sql = "select " . $column . " from " . $this->table;
-            if (!empty($criteria)) {
+            if (!empty($criteria) || !$criteria === "") {
                 $sql .= " where " . $criteria;
             }
             if (!empty($clause)) {
