@@ -18,11 +18,11 @@ class DashBoardProductService
     }
     public function getProducts(): array
     {
-        return $this->productRepository->findAllProducts();
+        return $this->productRepository->find();
     }
     public function getProductById($id)
     {
-        return $this->productRepository->findProductById($id);
+        return $this->productRepository->findById($id);
     }
     public function getLast()
     {
@@ -35,7 +35,7 @@ class DashBoardProductService
     }
     public function updateProduct($id, $data): bool
     {
-        $this->validateProduct($data);
+        $this->validateProduct($data);  
         return $this->productRepository->update($id, $data);
     }
     public function deleteCategory($id): bool
