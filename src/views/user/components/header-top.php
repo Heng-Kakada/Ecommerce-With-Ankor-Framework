@@ -4,33 +4,43 @@
             <div class="col-lg-12">
                 <div class="header__top__inner">
                     <div class="header__top__left">
-                        <!-- <ul>
-                            <li>USD <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li>EUR</li>
-                                    <li>USD</li>
-                                </ul>
-                            </li>
-                            <li>ENG <span class="arrow_carrot-down"></span>
-                                <ul>
-                                    <li>Spanish</li>
-                                    <li>ENG</li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Sign in</a> <span class="arrow_carrot-down"></span></li>
-                        </ul> -->
+                        <ul>
+                            <?php if ($user && ($user['role'] === 'manager' || $user['role'] === 'admin')): ?>
+                                <li>
+                                    <?php pk_route_path('/admin') ?>
+                                    <i class="fa-solid fa-screwdriver-wrench"
+                                        style="font-size:26px; color:black; vertical-align: middle; margin-right: 15px;"></i>
+                                    DashBoard
+                                    <?php pk_end_route_path(); ?>
+                                </li>
+                            <?php endif; ?>
+                        </ul>
                     </div>
                     <div class="header__logo">
                         <a href="/"><img src="/../resources/user/img/logo.png" alt=""></a>
                     </div>
                     <div class="header__top__right">
                         <div class="header__top__right__links">
-                            <a href="#" class="search-switch"><img src="/../resources/user/img/icon/search.png"
-                                    alt=""></a>
-                            <!-- <a href="#"><img src="/../resources/user/img/icon/heart.png" alt=""></a> -->
+                            <?php if ($user !== null): ?>
+                                <?php pk_route_path("/profile/" . $user['id']); ?>
+                                <i class="fa-regular fa-user"
+                                    style="margin-top: 5px; font-size:25px; color:black; vertical-align: middle;"></i>
+                                <?php pk_end_route_path(); ?>
+                                <?php pk_route_path('/logout'); ?>
+                                <i class="fa-solid fa-right-from-bracket"
+                                    style="margin-top: 5px; font-size:25px; color:black; vertical-align: middle;"></i>
+                                <?php pk_end_route_path(); ?>
+                            <?php else: ?>
+                                <?php pk_route_path('/login'); ?>
+                                <i class="fa-regular fa-user"
+                                    style="margin-top: 5px; font-size:25px; color:black; vertical-align: middle;"></i>
+                                <?php pk_end_route_path(); ?>
+                            <?php endif; ?>
                         </div>
                         <div class="header__top__right__cart">
-                            <a href="/cart"><img src="/../resources/user/img/icon/cart.png" alt=""> <span>0</span></a>
+                            <?php pk_route_path('/cart'); ?>
+                            <img src="/../resources/user/img/icon/cart.png" alt=""> <span>0</span>
+                            <?php pk_end_route_path(); ?>
                             <div class="cart__price">Cart: <span>$0.00</span></div>
                         </div>
                     </div>

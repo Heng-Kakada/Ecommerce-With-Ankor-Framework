@@ -13,10 +13,7 @@ class DashBoardUserService
     {
         $this->userRepository = $userRepository;
     }
-    public function getLastUserID()
-    {
-        return $this->userRepository->findLast();
-    }
+
     public function getUsers(): array
     {
         return $this->userRepository->find();
@@ -55,8 +52,6 @@ class DashBoardUserService
             'role_name' => 'required|string',
             'image' => 'string',
         ];
-
-
         Validator::validate(
             [
                 'username' => $data['username'],

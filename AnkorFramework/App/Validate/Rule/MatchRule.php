@@ -6,6 +6,7 @@ use AnkorFramework\App\Validate\RuleInterface;
 class MatchRule implements RuleInterface
 {
     protected $compareField;
+    protected $fullData;
 
     public function __construct($compareField)
     {
@@ -14,8 +15,6 @@ class MatchRule implements RuleInterface
 
     public function passes($value)
     {
-        // This method will be called with the value to compare 
-        // and relies on the Validator to pass the full data array
         return isset($this->fullData) &&
             isset($this->fullData[$this->compareField]) &&
             $value === $this->fullData[$this->compareField];
