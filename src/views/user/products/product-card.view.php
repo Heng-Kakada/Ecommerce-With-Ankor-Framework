@@ -10,11 +10,13 @@
                     </div>
                 </div>
                 <div class="product__item__text">
+
                     <h6><?= $product['name'] ?></h6>
                     <div class="product__item__price">$<?= number_format($product['price'], 2) ?></div>
                     <div class="cart_add">
-                        <form method="post" action="/addToCard">
-                            <input type="hidden" name="addtocart" value="<?= $product['category_name'] ?>" />
+                        <form method="post" action="/addToCart">
+                            <input type="hidden" name="product_id" min="1" value="<?= $product['id'] ?>" />
+                            <input type="hidden" name="quantity" value="1" />
                             <a><button style="border: none; background-color: inherit;">Add to cart</button></a>
                         </form>
                     </div>

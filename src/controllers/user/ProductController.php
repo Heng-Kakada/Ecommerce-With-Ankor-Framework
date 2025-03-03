@@ -24,4 +24,5 @@ class ProductController extends BaseController
         $related = $this->productService->getRelatedProducts($product['category_id']);
         Response::view('/user/products/product-detail.view', ['product' => $product, 'related' => $related]);
     }
+
 }

@@ -24,6 +24,15 @@
 9.  Contact
 10.  Footer Style
 -------------------------------------------------------------------*/
+/*custom css*/
+.pro-qty input::-webkit-outer-spin-button,
+.pro-qty input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+
 /*----------------------------------------*/
 /* Template default CSS
 /*----------------------------------------*/
@@ -1802,10 +1811,10 @@ ol {
 .shopping__cart__table table tbody tr td.quantity__item {
   width: 175px;
 }
-.shopping__cart__table table tbody tr td.quantity__item .quantity .pro-qty {
+.shopping__cart__table table tbody tr td.quantity__item .quantity .pro-qty, .cart_qty {
   width: 90px;
 }
-.shopping__cart__table table tbody tr td.quantity__item .quantity .pro-qty input {
+.shopping__cart__table table tbody tr td.quantity__item .quantity .pro-qty input, .cart-qty input {
   width: 65px;
   border: none;
   text-align: center;
@@ -1813,7 +1822,7 @@ ol {
   font-size: 16px;
   font-weight: 500;
 }
-.shopping__cart__table table tbody tr td.quantity__item .quantity .pro-qty .qtybtn {
+.shopping__cart__table table tbody tr td.quantity__item .quantity .pro-qty .qtybtn, .cart-qty .qtybtn {
   font-size: 16px;
   color: #888888;
   width: 10px;

@@ -1,3 +1,11 @@
+<?php 
+// foreach($data['cart'] as $cart)
+// {
+//     echo $cart->id . " " . $cart->name;
+// }
+// dd($data['cart']);
+// die(); ?>
+
 <?php
 include __DIR__ . '/../components/header.php';
 include __DIR__ . '/../components/breadcrumb.php';
@@ -9,8 +17,6 @@ $product = [
     'price' => 32.00,
     'img' => '/../resources/user/img/shop/cart/cart-1.jpg'
 ];
-
-
 
 ?>
 
@@ -31,7 +37,7 @@ $product = [
                             </tr>
                         </thead>
                         <tbody>
-
+                       
                             <?php require __DIR__ . '/cart-card.view.php'; ?>
 
                         </tbody>
@@ -61,8 +67,8 @@ $product = [
                 <div class="cart__total">
                     <h6>Cart total</h6>
                     <ul>
-                        <li>Subtotal <span>$ 169.50</span></li>
-                        <li>Total <span>$ 169.50</span></li>
+                        <li>Subtotal <span>$ <?= number_format($total_price, 2) ?></span></li>
+                        <li>Total <span>$ <?= number_format($total_price, 2) ?></span></li>
                     </ul>
                     <a href="#" class="primary-btn">Proceed to checkout</a>
                 </div>

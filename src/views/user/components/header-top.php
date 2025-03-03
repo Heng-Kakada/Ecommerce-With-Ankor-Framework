@@ -1,3 +1,12 @@
+<?php
+$cart = isset($_COOKIE["cart"]) ? json_decode($_COOKIE["cart"]) : [];
+$total_price = 0;
+
+foreach ($cart as $item) {
+    $total_price += $item->price * $item->quantity;
+}
+?>
+
 <div class="header__top">
     <div class="container">
         <div class="row">
@@ -39,9 +48,16 @@
                         </div>
                         <div class="header__top__right__cart">
                             <?php pk_route_path('/cart'); ?>
-                            <img src="/../resources/user/img/icon/cart.png" alt=""> <span>0</span>
+                            <?php
+                            $cart = isset($_COOKIE["cart"]) ? $_COOKIE["cart"] : "[]";
+                            $cart = json_decode($cart);
+                            ?>
+                            <img src="/../resources/user/img/icon/cart.png" alt=""> <span
+                                style="font-size: 14px; top: 50%; left:50%; transform: translate(-50%, -28%);"><?php echo count($cart) ?></span>
                             <?php pk_end_route_path(); ?>
-                            <div class="cart__price">Cart: <span>$0.00</span></div>
+                            <div class="cart__price">Cart:
+                                <span>$<?= number_format($total_price, 2) ?></span>
+                            </div>
                         </div>
                     </div>
                 </div>
