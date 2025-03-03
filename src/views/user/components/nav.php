@@ -5,9 +5,13 @@
                 <ul>
                     <li class="<?= pk_isCurrentUrl('/') ? 'active' : '' ?>"> <a href="/">Home</a></li>
                     <li class="<?= pk_isCurrentUrl('/shop') ? 'active' : '' ?>"> <a href="/shop">Shop</a>
-                        <ul class="dropdown">
-                            <li><a href="/categories/capcake">CapCake</a></li>
-                        </ul>
+                        <?php if (isset($navCat) && !empty($navCat)): ?>
+                            <ul class="dropdown">
+                                <?php foreach ($navCat as $k => $v): ?>
+                                    <li><a href="/categories/<?= strtolower($v['name']) ?>"><?= $v['name'] ?></a></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
                     </li>
                     <li class="<?= pk_isCurrentUrl('/about') ? 'active' : '' ?>"> <a href="/about">About</a></li>
                     <li class="<?= pk_isCurrentUrl('/contact') ? 'active' : '' ?>"> <a href="/contact">Contact</a></li>

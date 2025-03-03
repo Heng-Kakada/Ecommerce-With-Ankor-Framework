@@ -9,7 +9,7 @@ class DashBoardUserRepository extends Repository
 
     public string $table = "tbusers";
     // private $selectAllQeury = "select p.id, p.name, p.description, p.price, p.stock, c.id as category_id, c.name as category_name, p.image from tbproducts p inner join tbcategory c on p.category_id = c.id";
-     
+
     // public function findAllProducts(): array
     // {
     //     return $this->database->query($this->selectAllQeury . " order by p.id;")->get();
@@ -19,7 +19,6 @@ class DashBoardUserRepository extends Repository
 
     //     return $this->database->query($this->selectAllQeury . " where p.id = :id", ['id' => $id])->findAndFail();
     // }
-
 
     // public function save($data):bool
     // {

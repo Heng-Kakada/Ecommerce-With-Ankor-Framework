@@ -23,6 +23,8 @@ Route::post('/login-execute', AuthController::class, 'store');
 Route::get('/signup', AuthController::class, 'signup');
 Route::post('/register', AuthController::class, 'register');
 Route::get('/forgot', AuthController::class, 'forgot');
+
+
 /* 
     All Product Route
 */

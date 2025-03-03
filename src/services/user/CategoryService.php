@@ -14,6 +14,16 @@ class CategoryService
         $this->productRepository = $productRepository;
     }
 
+    public function getAllCategories()
+    {
+        return $this->categoryRepository->find();
+    }
+
+    public function getAllCategoryName()
+    {
+        return $this->categoryRepository->find("name");
+    }
+
     public function getProductByCategoryName($categoryName)
     {
         return $this->productRepository->find("", "category_name = '$categoryName'");

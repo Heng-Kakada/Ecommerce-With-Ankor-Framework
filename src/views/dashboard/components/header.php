@@ -27,7 +27,7 @@
 
     <li class="nav-item">
 
-    <a class="nav-link nav-icon" href="/">
+    <a class="nav-link nav-icon" href="/" target="_blank">
         <i class="bi bi-house-up"></i>
 
       </a><!-- End Notification Icon -->

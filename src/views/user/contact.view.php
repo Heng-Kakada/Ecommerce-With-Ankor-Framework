@@ -96,7 +96,7 @@ include __DIR__ . '/components/breadcrumb.php';
             </div>
             <div class="col-lg-8">
                 <div class="contact__form">
-                    <form action="#">
+                    <form>
                         <div class="row">
                             <div class="col-lg-6">
                                 <input type="text" placeholder="Name">
@@ -106,7 +106,7 @@ include __DIR__ . '/components/breadcrumb.php';
                             </div>
                             <div class="col-lg-12">
                                 <textarea placeholder="Message"></textarea>
-                                <button type="submit" class="site-btn">Send Us</button>
+                                <button type="button" class="site-btn">Send Us</button>
                             </div>
                         </div>
                     </form>
