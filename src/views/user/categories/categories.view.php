@@ -10,8 +10,6 @@ $products = $data['products'];
 <section class="shop spad">
     <div class="container">
         <?php
-        require __DIR__ . "/shop-search.view.php";
-
         if (isset($products) && !empty($products)) {
             require __DIR__ . "/../products/product-card.view.php";
         } else {

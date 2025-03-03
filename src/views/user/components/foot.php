@@ -8,6 +8,7 @@
 <script src="/../resources/user/js/owl.carousel.min.js"></script>
 <script src="/../resources/user/js/jquery.nicescroll.min.js"></script>
 <script src="/../resources/user/js/main.js"></script>
+<script src="https://kit.fontawesome.com/95cea87bd0.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

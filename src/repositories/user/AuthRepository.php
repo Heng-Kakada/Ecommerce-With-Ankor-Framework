@@ -1,34 +1,17 @@
 <?php
 namespace src\repositories\user;
 
-use AnkorFramework\App\Database\Core\Database;
+use AnkorFramework\App\Database\Repository\Repository;
 
-
-
-class AuthRepository
+class AuthRepository extends Repository
 {
-    private $database;
-
-    public function __construct(Database $database)
-    {
-        $this->database = $database;
-    }
-
-
+    public string $table = "tbusers";
     public function findByEmail($email)
     {
-        return $this->database->query('select * from users where email = :email', ['email' => $email])->find();
+        return $this->find('', "email='$email'");
     }
-
     public function findEmailPasswordRoleByEmail($email)
     {
-        return $this->database->query("select 
-        users.email,
-        users.password, 
-        roles.name as role 
-        from users join roles on 
-        users.role_id = roles.id 
-        where users.email = :email", ['email' => $email])->find();
+        return $this->find("id,email,password,username,role_name", "email = '$email'");
     }
-
 }

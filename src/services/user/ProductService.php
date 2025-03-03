@@ -17,5 +17,13 @@ class ProductService
     {
         return $this->productRepository->find('id,name,price,image,category_name', '', "order by rand() limit $limit");
     }
+    public function getProductById(int $id)
+    {
+        return $this->productRepository->findById($id);
+    }
+    public function getRelatedProducts(int $category_id, int $limit = 4)
+    {
+        return $this->productRepository->find('id,name,price,image,category_name', "category_id = $category_id", "order by rand() limit $limit");
+    }
 
 }

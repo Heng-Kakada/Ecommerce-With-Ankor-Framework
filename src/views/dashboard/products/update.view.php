@@ -1,4 +1,9 @@
 <?php
+use AnkorFramework\App\Http\Security\HttpSession;
+$errors = HttpSession::get('errors');
+HttpSession::unflash();
+?>
+<?php
 require __DIR__ . '/../components/head.php';
 include __DIR__ . '/../components/header.php';
 include __DIR__ . '/../components/sidebar.php';
@@ -23,11 +28,7 @@ include __DIR__ . '/../components/sidebar.php';
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Product Information</h5>
-                        <?php
-                        // dd($data);
-                        // dd($data['categories'])
-                        // die();
-                        ?>
+
                         <form method="POST" action="/admin/products/edit" enctype="multipart/form-data">
                             <input type="hidden" name="_method" value="PUT">
                             <input type="hidden" name="id" value="<?= $data['products']['id'] ?>">

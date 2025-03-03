@@ -67,7 +67,6 @@ class DashBoardProductController extends BaseController
                 'price' => $price,
                 'category_id' => $category_id,
                 'category_name' => $category_name,
-                'image' => $image,
                 'stock' => $stock
             ]));
         } catch (ValidationException $validationException) {
@@ -77,9 +76,6 @@ class DashBoardProductController extends BaseController
     }
     public function store()
     {
-        $uploader = new FileUpload();
-        $uploader->uploadFile($_FILES['image'], $this->productService->getLast()['max(id)'] + 1);
-
         $category = explode("_", pk_request('category'));
 
 
@@ -88,7 +84,7 @@ class DashBoardProductController extends BaseController
         $price = (float) pk_request('price');
         $category_id = (int) $category[0];
         $category_name = $category[1];
-        $image = $uploader->getImageURL();
+
         $stock = (int) pk_request('stock');
 
 
@@ -99,7 +95,6 @@ class DashBoardProductController extends BaseController
                 'price' => $price,
                 'category_id' => $category_id,
                 'category_name' => $category_name,
-                'image' => $image,
                 'stock' => $stock
             ]));
         } catch (ValidationException $validationException) {

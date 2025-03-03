@@ -1,32 +1,42 @@
 <?php
+include __DIR__ . '/components/header.php';
 use AnkorFramework\App\Http\Security\HttpSession;
 $errors = HttpSession::get('errors');
 HttpSession::unflash();
 ?>
-<h1>Login Form</h1>
-<form method="POST" action="/login-execute">
+<div id="logreg-forms">
+    <form class="form-signin" method="POST" action="/login-execute">
+        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
+        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" autofocus="">
+        <?php if (isset($errors[0]['email'])): ?>
+            <?= "<p class='text-danger' >" . $errors[0]['email'] . "</p>" ?>
+        <?php endif; ?>
 
-    <div>
-        <label for="email">Email:</label>
-        <input id="email" name="email">
-    </div>
-    <div>
-        <label for="password">Password:</label>
-        <input id="password" name="password">
-    </div>
-    <div>
-        <label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password">
+        <?php if (isset($errors[0]['password'])): ?>
+            <?= "<p class='text-danger' >" . $errors[0]['password'] . "</p>" ?>
+        <?php endif; ?>
+        <label class="pt-2">
             <input type="checkbox" name="remember"> Remember me
         </label>
-    </div>
 
-    <button type="submit">Login</button>
-</form>
+        <button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign in</button>
 
-<?php if (isset($errors[0]['email'])): ?>
-    <?= $errors[0]['email'] ?>
-<?php endif; ?>
+        <?php pk_route_path('/forgot', "id='forgot_pswd'"); ?>
+        Forgot password?
+        <?php pk_end_route_path(); ?>
+        <hr>
+        <p>Don't have an account!</p>
 
-<?php if (isset($errors[0]['password'])): ?>
-    <?= $errors[0]['password'] ?>
-<?php endif; ?>
+        <?php pk_route_path('/signup'); ?>
+        <button class="btn btn-primary btn-block" type="button" id="btn-signup"><i class="fas fa-user-plus"></i>
+            Sign up New Account
+        </button>
+        <?php pk_end_route_path(); ?>
+    </form>
+</div>
+
+
+<?php
+include __DIR__ . '/components/footer.php';
+?>

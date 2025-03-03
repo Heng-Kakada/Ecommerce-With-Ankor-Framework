@@ -24,12 +24,14 @@
             </a>
         </li><!-- End Products Nav -->
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="/admin/users">
-            <i class="bi bi-people-fill"></i>
-                <span>Users</span>
-            </a>
-        </li><!-- End Products Nav -->
+        <?php if ($user['role'] === "admin"): ?>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="/admin/users">
+                    <i class="bi bi-people-fill"></i>
+                    <span>Users</span>
+                </a>
+            </li><!-- End Products Nav -->
+        <?php endif; ?>
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">

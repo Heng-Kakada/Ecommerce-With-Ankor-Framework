@@ -10,17 +10,17 @@ class StrongPassword implements RuleInterface
     public function passes($value)
     {
 
-        $passwrod = $value ?? '';
+        $password = $value ?? '';
 
         $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/';
 
-        if (!preg_match($pattern, $passwrod)) {
+        if (!preg_match($pattern, $password)) {
             return false;
         }
 
         $commonPasswords = ['password', '123456', 'qwerty', 'letmein', 'welcome', 'admin', 'iloveyou'];
 
-        return !in_array(strtolower($passwrod), $commonPasswords);
+        return !in_array(strtolower($password), $commonPasswords);
 
     }
 

@@ -16,7 +16,7 @@ include __DIR__ . '/../components/sidebar.php';
         <h1>Create Product</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="/admin">Home</a></li>
                 <li class="breadcrumb-item"><a href="/products">Products</a></li>
                 <li class="breadcrumb-item active">Create Product</li>
             </ol>
@@ -29,7 +29,10 @@ include __DIR__ . '/../components/sidebar.php';
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Product Information</h5>
-
+                        <?php
+                        // dd($data['categories'][0]['name']);
+                        // die();
+                        ?>
                         <form method="POST" action="/admin/products/store" enctype="multipart/form-data">
                             <div class="row mb-3">
                                 <label for="productName" class="col-sm-2 col-form-label">Product Name</label>
@@ -77,10 +80,12 @@ include __DIR__ . '/../components/sidebar.php';
                                 <label for="productCategory" class="col-sm-2 col-form-label">Category</label>
                                 <div class="col-sm-10">
                                     <select class="form-select" id="productCategory" name="category">
-                                        <option selected disabled value="">Choose category...</option>
-                                        <?php if (isset($data['categories'])): ?>
-                                            <?php foreach ($data['categories'] as $category): ?>
-                                                <option value="<?= $category['id'] . "_" . $category['name']?>"><?= $category['name'] ?></option>
+
+                                        <?php if (isset($data['categories']) && !empty($data['categories'])): ?>
+                                            <?php foreach ($data['categories'] as $index => $category): ?>
+                                                <option value="<?= $category['id'] . "_" . $category['name'] ?>" <?= $index === 0 ? 'selected' : '' ?>>
+                                                    <?= $category['name'] ?>
+                                                </option>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
                                     </select>
@@ -99,7 +104,7 @@ include __DIR__ . '/../components/sidebar.php';
                                         accept="image/jpg, image/png, image/jpeg">
                                 </div>
                             </div>
-                            
+
 
                             <div class="row mb-3">
                                 <label for="productStock" class="col-sm-2 col-form-label">Stock Quantity</label>
@@ -117,15 +122,16 @@ include __DIR__ . '/../components/sidebar.php';
 
                             <div class="row mb-3">
                                 <div class="col-sm-10 offset-sm-2">
-                                    <button type="submit" class="btn btn-primary me-2" name ="submit">Create Product</button>
+                                    <button type="submit" class="btn btn-primary me-2" name="submit">Create
+                                        Product</button>
                                     <a href="/admin/products"><button type="button"
                                             class="btn btn-secondary">Cancel</button></a>
                                 </div>
                             </div>
                         </form>
-                        
+
                     </div>
-                    
+
                 </div>
             </div>
         </div>
