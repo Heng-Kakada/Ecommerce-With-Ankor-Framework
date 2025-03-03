@@ -7,6 +7,7 @@ class MatchRule implements RuleInterface
 {
     protected $compareField;
 
+    protected $fullData;
     public function __construct($compareField)
     {
         $this->compareField = $compareField;

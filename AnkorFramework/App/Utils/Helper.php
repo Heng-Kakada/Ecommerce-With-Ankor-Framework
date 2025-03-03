@@ -51,6 +51,10 @@ function pk_request($key)
 {
     return $_POST[$key];
 }
+function pk_files($key)
+{
+    return $_FILES[$key];
+}
 
 function pk_isCurrentUrl($value)
 {

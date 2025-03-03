@@ -4,6 +4,7 @@ namespace src\services\dashboard;
 use AnkorFramework\App\Validate\Validator;
 
 use src\repositories\dashboard\DashBoardUserRepository;
+use AnkorFramework\App\Resources\FileUpload\FileUpload;
 
 class DashBoardUserService
 {
@@ -13,15 +14,11 @@ class DashBoardUserService
     {
         $this->userRepository = $userRepository;
     }
-    public function getLastUserID()
-    {
-        return $this->userRepository->findLast();
-    }
     public function getUsers(): array
     {
         return $this->userRepository->find();
     }
-    public function getProductById($id)
+    public function getUserById($id)
     {
         return $this->userRepository->findById($id);
     }
@@ -31,41 +28,79 @@ class DashBoardUserService
     }
     public function createUser($data, $confirm_password): bool
     {
-        $this->validateUser($data, $confirm_password);
-        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        $this->validateUser($data)->validatePassword($data['password'], $confirm_password);
+
+        if (!empty($_FILES['image']['name'])) {
+            $uploader = new FileUpload();
+            $uploader->uploadFile($_FILES['image'], "User" . $this->userRepository->findLast()['max(id)'] + 1);
+            $data['image'] = $uploader->getImageURL();
+        }
+        $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
+
         return $this->userRepository->save($data);
     }
     public function updateUser($id, $data, $confirm_password): bool
     {
-        $this->validateUser($data, $confirm_password);
+        $this->validateUser($data, $id);
+
+        if (empty($data['password'])) {
+            unset($data['password']);
+        } else {
+            $this->validatePassword($data['password'], $confirm_password);
+            $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
+        }
+
+        if (!empty($_FILES['image']['name'])) {
+            $uploader = new FileUpload();
+            $uploader->uploadFile($_FILES['image'], $id);
+            $data['image'] = $uploader->getImageURL();
+        }
+
         return $this->userRepository->update($id, $data);
     }
-    public function deleteCategory($id): bool
+    public function deleteUser($id): bool
     {
         return $this->userRepository->delete($id);
     }
-    private function validateUser($data, $confirm_password)
+    private function validateUser($data, $id = 0)
     {
         $rules = [
-            'username' => 'required|string|max:50',
-            'email' => 'required|email|unique:tbusers|max:255', // unique:$tbname or unique:$tbname, $columnName to specific column to compare
-            'password' => 'required', // strong_password
-            'confirm_password' => 'required|match:password',
+            'firstname' => 'string|max:50',
+            'lastname' => 'string|max:55',
+            'age' => 'integer',
+            'gender' => 'string|max:10',
+            'username' => "required|string|max:50",
+            'email' => "required|max:255|email|unique:tbusers,email,{$id}", // unique:$tbname or unique:$tbname, $columnName to specific column to compare 
             'role_id' => 'required|integer',
             'role_name' => 'required|string',
-            'image' => 'string',
         ];
-
 
         Validator::validate(
             [
+                'firstname' => $data['firstname'],
+                'lastname' => $data['lastname'],
+                'age' => $data['age'],
+                'gender' => $data['gender'],
                 'username' => $data['username'],
                 'email' => $data['email'],
-                'password' => $data['password'],
-                'confirm_password' => $confirm_password,
                 'role_id' => $data['role_id'],
                 'role_name' => $data['role_name'],
-                'image' => $data['image'],
+            ],
+            $rules
+        );
+        return $this;
+    }
+    private function validatePassword($password, $confirm_password)
+    {
+        $rules = [
+            'password' => 'required', // strong_password
+            'confirm_password' => 'required|match:password',
+        ];
+        Validator::validate(
+            [
+                'password' => $password,
+                'confirm_password' => $confirm_password,
+
             ],
             $rules
         );

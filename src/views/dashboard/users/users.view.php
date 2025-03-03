@@ -37,6 +37,8 @@ include __DIR__ . '/../components/sidebar.php';
                                     <th scope="col">#</th>
                                     <th scope="col">Image</th>
                                     <th scope="col">Username</th>
+                                    <th scope="col">Gender</th>
+                                    <th scope="col">Age</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Role</th>
                                     <th scope="col">Actions</th>
@@ -52,6 +54,8 @@ include __DIR__ . '/../components/sidebar.php';
                                                     style="max-width: 120px;max-height: 100px;">
                                             </td>
                                             <td><?= $user['username'] ?></td> <!--username-->
+                                            <td><?= $user['gender'] ?></td> <!--username-->
+                                            <td><?= $user['age'] ?></td> <!--username-->
                                             <td><?= $user['email'] ?></td> <!--email-->
                                             <td><?= $user['role_name'] ?></td> <!--role_name-->
 
@@ -62,7 +66,7 @@ include __DIR__ . '/../components/sidebar.php';
                                                         <i class="bi bi-pencil"></i>
                                                     </a>
                                                     <button class="btn btn-danger btn-sm delete-btn" title="Delete"
-                                                        data-bs-toggle="modal" data-bs-target="#deleteProductModal"
+                                                        data-bs-toggle="modal" data-bs-target="#deleteUserModal"
                                                         data-id="<?= $user['id'] ?>">
                                                         <i class="bi bi-trash"></i>
                                                     </button>

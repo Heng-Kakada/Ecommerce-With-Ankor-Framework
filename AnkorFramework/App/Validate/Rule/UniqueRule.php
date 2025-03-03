@@ -8,36 +8,38 @@ class UniqueRule implements RuleInterface
 {
     private $table;
     private $column;
+    private $ignoreId; // ID of current record being updated
 
     public function __construct($parameter)
     {
-        // Parse the parameter which should be in format "table,column"
         $parts = explode(',', $parameter);
         $this->table = $parts[0];
         $this->column = $parts[1] ?? 'email';
+        $this->ignoreId = $parts[2] ?? null; // Optional ID to ignore in uniqueness check
     }
 
     public function passes($value)
     {
-        // Skip validation if value is null or empty
         if ($value === null || $value === '') {
             return true;
         }
 
-        // Create database connection
         $database = new Database();
+        
+        // If ignoreId is provided, exclude current record from uniqueness check
+        $query = $this->ignoreId 
+            ? "SELECT COUNT(*) as count FROM {$this->table} WHERE {$this->column} = :value AND id != :id" 
+            : "SELECT COUNT(*) as count FROM {$this->table} WHERE {$this->column} = :value";
 
-        // Check if the value exists in the specified table and column
-        $result = $database
-            ->query(
-                "SELECT COUNT(*) as count FROM {$this->table} WHERE {$this->column} = :value",
-                ['value' => $value]
-            )
-            ->find();
+        $params = $this->ignoreId 
+            ? ['value' => $value, 'id' => $this->ignoreId] 
+            : ['value' => $value];
 
-        // If count is 0, the value is unique
+        $result = $database->query($query, $params)->find();
+
         return $result['count'] == 0;
     }
+
 
     public function message($attribute)
     {

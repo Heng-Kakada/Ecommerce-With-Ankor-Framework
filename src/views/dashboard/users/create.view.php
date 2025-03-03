@@ -29,11 +29,62 @@ include __DIR__ . '/../components/sidebar.php';
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">User Information</h5>
-                        <?php
-                        // dd($data['categories'][0]['name']);
-                        // die();
-                        ?>
+
                         <form method="POST" action="/admin/users/store" enctype="multipart/form-data">
+
+
+                            <div class="row mb-3">
+                                <label for="firstname" class="col-sm-2 col-form-label">Firstname</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="firstname" name="firstname">
+                                    <?php if (isset($errors[0]['firstname'])): ?>
+                                        <div class="errors-validate">
+                                            <?= $errors[0]['firstname'] ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="lastname" class="col-sm-2 col-form-label">Lastname</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="lastname" name="lastname">
+                                    <?php if (isset($errors[0]['lastname'])): ?>
+                                        <div class="errors-validate">
+                                            <?= $errors[0]['lastname'] ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="productStock" class="col-sm-2 col-form-label">Age</label>
+                                <div class="col-sm-10">
+                                    <input type="number" class="form-control" id="age" name="age">
+                                    <?php if (isset($errors[0]['age'])): ?>
+                                        <div class="errors-validate">
+                                            <?= $errors[0]['age'] ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label for="role" class="col-sm-2 col-form-label">Gender</label>
+                                <div class="col-sm-10">
+                                    <select class="form-select" id="gender" name="gender">
+                                        <option value="male" selected>Male</option>
+                                        <option value="female">Female</option>
+
+                                    </select>
+                                    <?php if (isset($errors[0]['gender'])): ?>
+                                        <div class="errors-validate">
+                                            <?= $errors[0]['gender'] ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+
                             <div class="row mb-3">
                                 <label for="username" class="col-sm-2 col-form-label">Username</label>
                                 <div class="col-sm-10">

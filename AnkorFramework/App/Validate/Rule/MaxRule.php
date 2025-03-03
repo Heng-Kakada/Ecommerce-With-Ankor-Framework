@@ -14,7 +14,7 @@ class MaxRule implements RuleInterface
     }
 
     public function passes($value)
-    {
+    {  
         if (is_string($value)) {
             return strlen($value) <= $this->max;
         } elseif (is_numeric($value)) {

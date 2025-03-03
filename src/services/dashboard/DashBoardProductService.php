@@ -12,10 +12,6 @@ class DashBoardProductService
     {
         $this->productRepository = $productRepository;
     }
-    public function getLastProductID()
-    {
-        return $this->productRepository->findLast();
-    }
     public function getProducts(): array
     {
         return $this->productRepository->find();
@@ -35,7 +31,7 @@ class DashBoardProductService
     }
     public function updateProduct($id, $data): bool
     {
-        $this->validateProduct($data);  
+        $this->validateProduct($data);
         return $this->productRepository->update($id, $data);
     }
     public function deleteCategory($id): bool
