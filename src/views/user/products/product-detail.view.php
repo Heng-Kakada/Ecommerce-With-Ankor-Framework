@@ -54,7 +54,8 @@ $related = $data['related'];
 
                                     <?= $product['category_name'] ?? "None" ?>
 
-                                </span><?php pk_end_route_path(); ?></li>
+                                </span><?php pk_end_route_path(); ?>
+                            </li>
                         </ul>
                         <div class="product__details__option">
                             <div class="quantity">
@@ -62,7 +63,11 @@ $related = $data['related'];
                                     <input type="text" value="2">
                                 </div>
                             </div>
-                            <a href="#" class="primary-btn">Add to cart</a>
+                            <form method="post" action="/addToCard">
+                                <input type="hidden" name="addtocart" value="<?= $product['category_name'] ?>" />
+                                <a class="primary-btn"><button type="submit"
+                                        style="border: none; background-color: inherit;">Add to cart</button></a>
+                            </form>
                             <a href="#" class="heart__btn"><span class="icon_heart_alt"></span></a>
                         </div>
                     </div>

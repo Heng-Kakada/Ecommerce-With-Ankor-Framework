@@ -13,7 +13,10 @@
                     <h6><?= $product['name'] ?></h6>
                     <div class="product__item__price">$<?= number_format($product['price'], 2) ?></div>
                     <div class="cart_add">
-                        <a href="#">Add to cart</a>
+                        <form method="post" action="/addToCard">
+                            <input type="hidden" name="addtocart" value="<?= $product['category_name'] ?>" />
+                            <a><button style="border: none; background-color: inherit;">Add to cart</button></a>
+                        </form>
                     </div>
                 </div>
                 <?php pk_end_route_path(); ?>

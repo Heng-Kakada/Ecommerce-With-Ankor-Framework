@@ -10,4 +10,10 @@ class CartController extends BaseController
     {
         Response::view('user/cart/cart.view');
     }
+
+    public function addToCard()
+    {
+        $addtocart = pk_request('addtocart');
+        Response::previousUrl();
+    }
 }
