@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `tbcategory` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table dbproducttest.tbcategory: ~4 rows (approximately)
+-- Dumping data for table dbproducttest.tbcategory: ~2 rows (approximately)
 INSERT INTO `tbcategory` (`id`, `name`, `description`, `created_at`, `modified_at`) VALUES
 	(6, 'CapCake', 'The CapCake is a perfect blend of elegance and indulgence, offering a delightful twist on classic cupcakes.', '2025-03-02 15:20:54', '2025-03-02 15:20:54'),
 	(7, 'Biscuit', 'Crisp, golden, and irresistibly delicious, the biscuit is a timeless treat enjoyed in various forms across the world.', '2025-03-02 15:21:55', '2025-03-02 15:21:55'),
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `tbproducts` (
   `name` varchar(100) NOT NULL,
   `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `price` decimal(10,2) NOT NULL,
-  `image` text,
+  `image` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'https://php-ankor-images.s3.ap-southeast-1.amazonaws.com/no_image_available.png',
   `stock` int NOT NULL,
   `category_id` int DEFAULT NULL,
   `category_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `tbproducts` (
   PRIMARY KEY (`id`),
   KEY `category_id` (`category_id`),
   CONSTRAINT `tbproducts_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `tbcategory` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Dumping data for table dbproducttest.tbproducts: ~15 rows (approximately)
 INSERT INTO `tbproducts` (`id`, `name`, `description`, `price`, `image`, `stock`, `category_id`, `category_name`, `created_at`, `modified_at`) VALUES
@@ -89,7 +89,9 @@ INSERT INTO `tbproducts` (`id`, `name`, `description`, `price`, `image`, `stock`
 	(22, 'Gooey Butte Cake', 'Gooey Butte Cake', 1.00, 'https://php-ankor-images.s3.ap-southeast-1.amazonaws.com/22_gooeybuttecake_1.jpg', 1, 9, 'Butter', '2025-03-02 16:25:59', '2025-03-02 16:25:59'),
 	(23, 'Marble Butter Cake', 'Marble Butter Cake', 2.00, 'https://php-ankor-images.s3.ap-southeast-1.amazonaws.com/23_marblebuttercake_1.jpg', 0, 9, 'Butter', '2025-03-02 16:26:30', '2025-03-02 16:26:30'),
 	(24, 'Ooey Gooey Cake', 'Ooey Gooey Cake', 2.00, 'https://php-ankor-images.s3.ap-southeast-1.amazonaws.com/24_ooeygooeycake_1.jpg', 0, 9, 'Butter', '2025-03-02 16:27:05', '2025-03-02 16:27:05'),
-	(25, 'Vanilla Layer Cake Vicky Wasik', 'Vanilla Layer Cake Vicky Wasik', 1.00, 'https://php-ankor-images.s3.ap-southeast-1.amazonaws.com/25_vanillalayercakevickywasik_1.jpg', 0, 9, 'Butter', '2025-03-02 16:27:42', '2025-03-02 16:27:42');
+	(25, 'Vanilla Layer Cake Vicky Wasik', 'Vanilla Layer Cake Vicky Wasik', 1.00, 'https://php-ankor-images.s3.ap-southeast-1.amazonaws.com/25_vanillalayercakevickywasik_1.jpg', 0, 9, 'Butter', '2025-03-02 16:27:42', '2025-03-02 16:27:42'),
+	(35, 'Product Test 1', 'abasdf', 15.00, 'https://php-ankor-images.s3.ap-southeast-1.amazonaws.com/35_CookiesandCream.jpeg', 15, 8, 'Donut', '2025-03-03 13:53:43', '2025-03-03 13:54:06'),
+	(37, 'Product Test 2', 'description2', 18.00, 'https://php-ankor-images.s3.ap-southeast-1.amazonaws.com/no_image_available.png', 0, 8, 'Donut', '2025-03-03 13:57:30', '2025-03-03 13:57:39');
 
 -- Dumping structure for table dbproducttest.tbroles
 DROP TABLE IF EXISTS `tbroles`;
@@ -126,13 +128,14 @@ CREATE TABLE IF NOT EXISTS `tbusers` (
   UNIQUE KEY `email` (`email`),
   KEY `role_id` (`role_id`),
   CONSTRAINT `tbusers_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `tbroles` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Dumping data for table dbproducttest.tbusers: ~3 rows (approximately)
+-- Dumping data for table dbproducttest.tbusers: ~8 rows (approximately)
 INSERT INTO `tbusers` (`id`, `firstname`, `lastname`, `age`, `gender`, `username`, `email`, `password`, `image`, `role_id`, `role_name`, `created_at`, `updated_at`) VALUES
 	(1, 'defualt', 'user', 0, 'male', 'pikoadmin', 'pikoadmin@gmail.com', '$2y$12$0MiOQnLPhILkf4WppGRHhuI84uFvzrxp84tiHQf9nHC0TGh0hyVo6', 'https://php-ankor-images.s3.ap-southeast-1.amazonaws.com/user_default_profile.png', 2, 'admin', '2025-02-27 19:24:06', '2025-03-03 16:25:13'),
 	(2, 'defualt', 'user', 0, 'male', 'piko', 'piko@gmail.com', '$2y$12$0MiOQnLPhILkf4WppGRHhuI84uFvzrxp84tiHQf9nHC0TGh0hyVo6', 'https://php-ankor-images.s3.ap-southeast-1.amazonaws.com/user_default_profile.png', 1, 'customer', '2025-02-27 19:24:47', '2025-03-03 16:25:13'),
-	(3, 'defualt', 'user', 0, 'male', 'pikomanager', 'pikomanager@gmail.com', '$2y$12$uCnOGDvCOei7tZaoU4vpJeVyUk7tXCTHvOzbJV5GUMGgjztvX2KA2', 'https://php-ankor-images.s3.ap-southeast-1.amazonaws.com/user_default_profile.png', 3, 'manager', '2025-02-27 20:06:27', '2025-03-03 16:25:13');
+	(3, 'defualt', 'user', 0, 'male', 'pikomanager', 'pikomanager@gmail.com', '$2y$12$uCnOGDvCOei7tZaoU4vpJeVyUk7tXCTHvOzbJV5GUMGgjztvX2KA2', 'https://php-ankor-images.s3.ap-southeast-1.amazonaws.com/user_default_profile.png', 3, 'manager', '2025-02-27 20:06:27', '2025-03-03 16:25:13'),
+	(30, 'default1', 'user', 19, 'female', 'user20', 'user20@gmail.com', '$2y$10$CIm8q5IZz/APOFl2qC5pFOlFWs0CksnTtsgN8fOKX69/tPuH2.bHK', 'https://php-ankor-images.s3.ap-southeast-1.amazonaws.com/user_default_profile.png', 3, 'manager', '2025-03-03 20:54:59', '2025-03-03 20:54:59');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
