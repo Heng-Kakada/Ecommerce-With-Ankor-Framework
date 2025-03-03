@@ -3,6 +3,7 @@ namespace src\services\dashboard;
 
 use AnkorFramework\App\Validate\Validator;
 use src\repositories\dashboard\DashBoardProductRepository;
+use AnkorFramework\App\Resources\FileUpload\FileUpload;
 
 class DashBoardProductService
 {
@@ -20,18 +21,26 @@ class DashBoardProductService
     {
         return $this->productRepository->findById($id);
     }
-    public function getLast()
-    {
-        return $this->productRepository->findLast();
-    }
     public function createProduct($data): bool
     {
         $this->validateProduct($data);
+
+        if (!empty($_FILES['image']['name'])) {
+            $uploader = new FileUpload();
+            $uploader->uploadFile($_FILES['image'], $this->productRepository->findLast()['max(id)'] + 1);
+            $data['image'] = $uploader->getImageURL();
+        }
+
         return $this->productRepository->save($data);
     }
     public function updateProduct($id, $data): bool
     {
         $this->validateProduct($data);
+        if (!empty($_FILES['image']['name'])) {
+            $uploader = new FileUpload();
+            $uploader->uploadFile($_FILES['image'], $id);
+            $data['image'] = $uploader->getImageURL();
+        }
         return $this->productRepository->update($id, $data);
     }
     public function deleteCategory($id): bool
@@ -45,7 +54,6 @@ class DashBoardProductService
             'description' => 'string|max:255',
             'price' => 'required|float',
             'category_id' => 'required|int',
-            'image' => 'string',
             'stock' => 'required|int',
         ];
 
@@ -55,7 +63,6 @@ class DashBoardProductService
                 'name' => $data['name'],
                 'description' => $data['description'],
                 'price' => $data['price'],
-                'image' => $data['image'],
                 'stock' => $data['stock'],
                 'category_id' => $data['category_id']
             ],

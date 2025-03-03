@@ -52,7 +52,7 @@ class DashBoardUserService
 
         if (!empty($_FILES['image']['name'])) {
             $uploader = new FileUpload();
-            $uploader->uploadFile($_FILES['image'], $id);
+            $uploader->uploadFile($_FILES['image'], "User" . $id);
             $data['image'] = $uploader->getImageURL();
         }
 
