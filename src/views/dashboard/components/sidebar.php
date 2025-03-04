@@ -24,6 +24,13 @@
             </a>
         </li><!-- End Products Nav -->
 
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/notexist">
+            <i class="bi bi-bag"></i>
+                <span>Orders</span>
+            </a>
+        </li>
+
         <?php if ($user['role'] === "admin"): ?>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="/admin/users">
