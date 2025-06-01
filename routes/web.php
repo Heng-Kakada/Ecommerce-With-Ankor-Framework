@@ -43,10 +43,8 @@ Route::get('/categories/{slug}', CategoryController::class, 'show');
     Cart Route
 */
 Route::get('/cart', CartController::class, 'index');
-
-
-
-
-
+Route::post('/addToCart', CartController::class, 'addToCart');
+Route::put('/cart/updateCart' , CartController::class,'updateCart');
+Route::delete('/cart/deleteCart', CartController::class,'deleteFromCart');
 
 require_once "auth.php";

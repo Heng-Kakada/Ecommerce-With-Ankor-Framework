@@ -37,6 +37,7 @@ Route::middleware(['auth', 'manager', 'admin'])->group(function () {
     Route::put('/admin/categories/edit', DashBoardCategoryController::class, 'update');
     Route::delete('/admin/categories/delete', DashBoardCategoryController::class, 'destroy');
 
+    //
 
     Route::get('/admin/file_upload', DashboardController::class, 'file_upload');
     Route::post('/admin/upload', DashboardController::class, 'upload');

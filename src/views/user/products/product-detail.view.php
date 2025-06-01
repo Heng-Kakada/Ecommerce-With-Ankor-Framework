@@ -54,15 +54,21 @@ $related = $data['related'];
 
                                     <?= $product['category_name'] ?? "None" ?>
 
-                                </span><?php pk_end_route_path(); ?></li>
+                                </span><?php pk_end_route_path(); ?>
+                            </li>
                         </ul>
                         <div class="product__details__option">
+                        <form method="POST" action="/addToCart">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" value="2">
+                                    <input type="number" name="quantity" min="1" max="<?= $product['stock']?>" value = "1" readonly>
                                 </div>
                             </div>
-                            <a href="#" class="primary-btn">Add to cart</a>
+                            
+                                <input type="hidden" name="product_id" value="<?= $product['id'] ?>" />
+                                <a class="primary-btn"><button type="submit"
+                                        style="border: none; background-color: inherit;">Add to cart</button></a>
+                            </form>
                             <a href="#" class="heart__btn"><span class="icon_heart_alt"></span></a>
                         </div>
                     </div>

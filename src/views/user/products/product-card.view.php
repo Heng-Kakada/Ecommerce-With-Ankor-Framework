@@ -10,10 +10,15 @@
                     </div>
                 </div>
                 <div class="product__item__text">
+
                     <h6><?= $product['name'] ?></h6>
                     <div class="product__item__price">$<?= number_format($product['price'], 2) ?></div>
                     <div class="cart_add">
-                        <a href="#">Add to cart</a>
+                        <form method="post" action="/addToCart">
+                            <input type="hidden" name="product_id" min="1" value="<?= $product['id'] ?>" />
+                            <input type="hidden" name="quantity" value="1" />
+                            <a><button style="border: none; background-color: inherit;">Add to cart</button></a>
+                        </form>
                     </div>
                 </div>
                 <?php pk_end_route_path(); ?>
